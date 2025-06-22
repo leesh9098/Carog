@@ -1,7 +1,7 @@
 import type { Children } from "@/lib/types";
 import { Card, CardAction, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Link } from "react-router-dom";
-import FlexDiv from "./FlexDiv";
+import FlexDiv from "@/components/FlexDiv";
 
 export default function ItemCard({
     date,
@@ -19,7 +19,7 @@ export default function ItemCard({
                 <CardAction>
                     <Link
                         to={to}
-                        className="text-sm font-semibold text-gray-500"
+                        className="text-sm font-semibold text-gray-400"
                     >
                         수정
                     </Link>
