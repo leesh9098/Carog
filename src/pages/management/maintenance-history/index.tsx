@@ -1,6 +1,7 @@
 import FlexDiv from "@/components/FlexDiv";
 import ItemCard from "@/components/ItemCard";
 import AddButton from "@/molecules/AddButton";
+import { Textarea } from "@/components/ui/textarea";
 
 export default function MaintenanceHistory() {
     // 정비내역 페이지
@@ -32,7 +33,7 @@ export default function MaintenanceHistory() {
                     </div>
                     <div className="flex flex-col gap-2">
                         <p className="text-sm font-semibold">메모</p>
-                        <textarea className="text-sm font-semibold bg-gray-200 rounded-lg"></textarea>
+                        <Textarea />
                     </div>
                 </div>
             </ItemCard>

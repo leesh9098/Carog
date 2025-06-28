@@ -1,6 +1,7 @@
 import FlexDiv from "@/components/FlexDiv";
 import AddButton from "@/molecules/AddButton";
 import ItemCard from "@/components/ItemCard";
+import { Textarea } from "@/components/ui/textarea";
 
 export default function Fuel() {
     // 유류비 페이지
@@ -36,7 +37,7 @@ export default function Fuel() {
                 </div>
                 <div className="flex flex-col gap-2">
                     <p className="text-sm font-semibold">메모</p>
-                    <textarea className="text-sm font-semibold bg-gray-200 rounded-lg"></textarea>
+                    <Textarea />
                 </div>
             </div>
         </ItemCard>

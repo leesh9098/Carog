@@ -1,0 +1,30 @@
+import FlexDiv from "@/components/FlexDiv";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+
+export default function MaintenanceHistoryId() {
+    return (
+        <FlexDiv className="flex flex-col gap-4 p-4">
+            <div className="flex flex-col gap-2">
+                <p className="text-sm font-semibold">항목</p>
+                <Input placeholder="항목을 입력해주세요" />
+            </div>
+            <div className="flex flex-col gap-2">
+                <p className="text-sm font-semibold">금액</p>
+                <Input placeholder="0원" />
+            </div>
+            <div className="flex flex-col gap-2">
+                <p className="text-sm font-semibold">키로수</p>
+                <Input placeholder="0km" />
+            </div>
+            <div className="flex flex-col gap-2">
+                <p className="text-sm font-semibold">업체명</p>
+                <Input placeholder="업체명을 입력해주세요" />
+            </div>
+            <div className="flex flex-col gap-2">
+                <p className="text-sm font-semibold">메모</p>
+                <Textarea />
+            </div>
+        </FlexDiv>
+    )
+}
