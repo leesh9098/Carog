@@ -1,9 +1,11 @@
 import FlexDiv from "@/components/FlexDiv";
-import { Button } from "@/components/ui/button";
+import {Button} from "@/components/ui/button";
 
 export default function Login() {
-    const handleLogin = async () => {
 
+    const handleLogin = async () => {
+        // window.location.href = "https://carog-api.seoeungi.work/oauth2/authorization/kakao";
+        window.location.href = "http://localhost:8030/oauth2/authorization/kakao";
     };
 
     return (
