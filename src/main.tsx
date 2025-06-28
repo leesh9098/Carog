@@ -14,17 +14,17 @@ import Installment from '@/pages/management/installment'
 import Etc from '@/pages/management/etc'
 import ParkingFee from '@/pages/management/parking-fee'
 import Header from '@/organisms/Header'
-// import { SidebarProvider } from '@/components/ui/sidebar'
-// import Sidebar from './components/Sidebar'
+import { SidebarProvider } from '@/components/ui/sidebar'
+import Sidebar from './components/Sidebar'
 
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <BrowserRouter>
-      {/* <SidebarProvider> */}
+      <SidebarProvider>
         <Header />
-        {/* <Sidebar /> */}
-        <div className='mt-14'>
+        <Sidebar />
+        <div className='w-full mt-14'>
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
@@ -40,7 +40,7 @@ createRoot(document.getElementById('root')!).render(
             <Route path="/management/parking-fee" element={<ParkingFee />} />
           </Routes>
         </div>
-      {/* </SidebarProvider> */}
+      </SidebarProvider>
     </BrowserRouter>
   </StrictMode>
 )
