@@ -2,11 +2,15 @@ import FlexDiv from "@/components/FlexDiv";
 import AddButton from "@/molecules/AddButton";
 import ItemCard from "@/components/ItemCard";
 import { Textarea } from "@/components/ui/textarea";
+import SelectCar from "@/components/SelectCar";
 
 export default function ParkingFee() {
     // 주차비 페이지
     return (
         <FlexDiv className="flex flex-col gap-4 p-4">
+            <div className="flex justify-center w-full">
+                <SelectCar />
+            </div>
             <div className="flex justify-center">
                 <AddButton to="/management/parking-fee/add" />
             </div>

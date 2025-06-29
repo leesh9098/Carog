@@ -1,6 +1,7 @@
 import FlexDiv from "@/components/FlexDiv";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { Button } from "@/components/ui/button";
 
 export default function InsuranceDutyId() {
     return (
@@ -20,6 +21,10 @@ export default function InsuranceDutyId() {
             <div className="flex flex-col gap-2">
                 <p className="text-sm font-semibold">메모</p>
                 <Textarea />
+            </div>
+            <div className="flex justify-end gap-2">
+                <Button variant="default">저장</Button>
+                <Button variant="outline">취소</Button>
             </div>
         </FlexDiv>
     )
