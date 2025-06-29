@@ -7,15 +7,25 @@ import {
     SidebarMenuButton,
     SidebarMenuItem,
     SidebarMenuSub,
-    SidebarMenuSubItem
+    SidebarMenuSubItem,
+    useSidebar
 } from "@/components/ui/sidebar";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 import { ChevronDown } from "lucide-react";
 
 export default function Sidebar() {
+    const navigate = useNavigate();
     const pathname = useLocation();
     const isHome = pathname.pathname === '/';
+
+    const { setOpenMobile } = useSidebar();
+
+    const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, to: string) => {
+        e.preventDefault();
+        setOpenMobile(false);
+        navigate(to);
+    };
 
     return (
         <ShadcnSidebar side="right">
@@ -29,7 +39,10 @@ export default function Sidebar() {
                         <>
                             <SidebarMenu>
                                 <SidebarMenuItem>
-                                    <Link to="/">
+                                    <Link
+                                        to="/"
+                                        onClick={(e) => handleLinkClick(e, '/')}
+                                    >
                                         <SidebarMenuButton className="font-semibold text-lg">
                                             홈
                                         </SidebarMenuButton>
@@ -48,37 +61,58 @@ export default function Sidebar() {
                                         <CollapsibleContent>
                                             <SidebarMenuSub>
                                                 <SidebarMenuSubItem className="font-semibold text-base">
-                                                    <Link to="/management/maintenance-history">
+                                                    <Link
+                                                        to="/management/maintenance-history"
+                                                        onClick={(e) => handleLinkClick(e, '/management/maintenance-history')}
+                                                    >
                                                         정비내역
                                                     </Link>
                                                 </SidebarMenuSubItem>
                                                 <SidebarMenuSubItem className="font-semibold text-base">
-                                                    <Link to="/management/fuel">
+                                                    <Link
+                                                        to="/management/fuel"
+                                                        onClick={(e) => handleLinkClick(e, '/management/fuel')}
+                                                    >
                                                         유류비
                                                     </Link>
                                                 </SidebarMenuSubItem>
                                                 <SidebarMenuSubItem className="font-semibold text-base">
-                                                    <Link to="/management/insurance-duty">
+                                                    <Link
+                                                        to="/management/insurance-duty"
+                                                        onClick={(e) => handleLinkClick(e, '/management/insurance-duty')}
+                                                    >
                                                         보험료/세금
                                                     </Link>
                                                 </SidebarMenuSubItem>
                                                 <SidebarMenuSubItem className="font-semibold text-base">
-                                                    <Link to="/management/accident">
+                                                    <Link
+                                                        to="/management/accident"
+                                                        onClick={(e) => handleLinkClick(e, '/management/accident')}
+                                                    >
                                                         사고
                                                     </Link>
                                                 </SidebarMenuSubItem>
                                                 <SidebarMenuSubItem className="font-semibold text-base">
-                                                    <Link to="/management/installment">
+                                                    <Link
+                                                        to="/management/installment"
+                                                        onClick={(e) => handleLinkClick(e, '/management/installment')}
+                                                    >
                                                         할부
                                                     </Link>
                                                 </SidebarMenuSubItem>
                                                 <SidebarMenuSubItem className="font-semibold text-base">
-                                                    <Link to="/management/parking-fee">
+                                                    <Link
+                                                        to="/management/parking-fee"
+                                                        onClick={(e) => handleLinkClick(e, '/management/parking-fee')}
+                                                    >
                                                         주차비
                                                     </Link>
                                                 </SidebarMenuSubItem>
                                                 <SidebarMenuSubItem className="font-semibold text-base">
-                                                    <Link to="/management/etc">
+                                                    <Link
+                                                        to="/management/etc"
+                                                        onClick={(e) => handleLinkClick(e, '/management/etc')}
+                                                    >
                                                         기타
                                                     </Link>
                                                 </SidebarMenuSubItem>
@@ -91,7 +125,10 @@ export default function Sidebar() {
                     )}
                     <SidebarMenu>
                         <SidebarMenuItem>
-                            <Link to="/my">
+                            <Link
+                                to="/my"
+                                onClick={(e) => handleLinkClick(e, '/my')}
+                            >
                                 <SidebarMenuButton className="font-semibold text-lg">
                                     마이페이지
                                 </SidebarMenuButton>

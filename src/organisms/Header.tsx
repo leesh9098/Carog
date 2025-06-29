@@ -41,9 +41,9 @@ export default function Header() {
         <header className="fixed top-0 left-1/2 transform -translate-x-1/2 w-full max-w-120 h-14 flex items-center shadow-md px-4 bg-white">
             <FlexDiv className="relative w-full justify-between">
                 <Link to="/">
-                    <span className="text-lg font-semibold">Carog</span>
+                    <span className="text-lg font-bold">Carog</span>
                 </Link>
-                <span className="text-xl font-semibold absolute left-1/2 transform -translate-x-1/2">
+                <span className="text-xl font-bold absolute left-1/2 transform -translate-x-1/2">
                     {getTitle()}
                 </span>
                 <Button

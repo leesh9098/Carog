@@ -1,22 +1,35 @@
+import CarCard from "@/components/CarCard";
 import FlexDiv from "@/components/FlexDiv";
-import ItemCard from "@/components/ItemCard";
 import AddButton from "@/molecules/AddButton";
+
+const mockCarList = [
+    {
+        id: 1,
+        name: "LF소나타",
+        licensePlateNumber: "65보 6191",
+        isRepresentative: true
+    },
+    {
+        id: 2,
+        name: "모닝",
+        licensePlateNumber: "65보 6192",
+        isRepresentative: false
+    }
+];
 
 export default function Cars() {
     return (
-        <div className="w-full">
+        <FlexDiv className="w-full flex-col p-4 gap-y-4">
             <AddButton to="/" />
-            <h1>Cars</h1>
-            <ItemCard date="2025-06-21" to="/">
-                <FlexDiv className="justify-between items-center">
-                    <span className="text-base font-semibold">테스트</span>
-                    <span className="text-base font-semibold text-gray-400">테스트</span>
-                </FlexDiv>
-                <FlexDiv className="justify-between items-center">
-                    <span className="text-base font-semibold">테스트1</span>
-                    <span className="text-base font-semibold text-gray-400">테스트1</span>
-                </FlexDiv>
-            </ItemCard>
-        </div>
+            <FlexDiv className="flex-col gap-y-4">
+                {mockCarList.map((car) => (
+                    <CarCard
+                        key={car.id}
+                        isDetailPage
+                        {...car}
+                    />
+                ))}
+            </FlexDiv>
+        </FlexDiv>
     )
 }
