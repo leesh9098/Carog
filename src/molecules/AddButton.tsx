@@ -7,7 +7,7 @@ export default function AddButton({ to }: { to: string }) {
         <Link to={to}>
             <Button
                 variant="ghost"
-                className="gap-2"
+                className="w-full gap-2"
             >
                 <Plus className="size-4" />
                 <span className="text-base font-semibold">추가</span>
