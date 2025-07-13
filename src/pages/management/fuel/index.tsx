@@ -7,43 +7,43 @@ import SelectCar from "@/components/SelectCar";
 export default function Fuel() {
     // 유류비 페이지
     return (
-        <FlexDiv className="flex flex-col gap-4 p-4">
-            <div className="flex justify-center w-full">
+        <FlexDiv className="flex-col gap-4 p-4">
+            <FlexDiv className="justify-center w-full">
                 <SelectCar />
-            </div>
-            <div className="flex justify-center">
+            </FlexDiv>
+            <FlexDiv className="justify-center">
                 <AddButton to="/management/fuel/add" />
-            </div>
+            </FlexDiv>
             <ItemCard
                 date="2025-06-21"
                 to="/management/fuel/1"
             >
-                <div className="flex flex-col gap-2">
-                    <div className="flex justify-between items-center">
+                <FlexDiv className="flex-col gap-2">
+                    <FlexDiv className="justify-between items-center">
                         <p className="text-sm font-semibold">유종</p>
                         <p className="text-sm font-semibold text-gray-400">휘발유</p>
-                    </div>
-                    <div className="flex justify-between items-center">
+                    </FlexDiv>
+                    <FlexDiv className="justify-between items-center">
                         <p className="text-sm font-semibold">금액</p>
                         <p className="text-sm font-semibold text-gray-400">100,000원</p>
-                    </div>
-                    <div className="flex justify-between items-center">
+                    </FlexDiv>
+                    <FlexDiv className="justify-between items-center">
                         <p className="text-sm font-semibold">리터수</p>
                         <p className="text-sm font-semibold text-gray-400">40L</p>
-                    </div>
-                    <div className="flex justify-between items-center">
+                    </FlexDiv>
+                    <FlexDiv className="justify-between items-center">
                         <p className="text-sm font-semibold">업체명</p>
                         <p className="text-sm font-semibold text-gray-400">현대셀프주유소</p>
-                    </div>
-                    <div className="flex justify-between items-center">
+                    </FlexDiv>
+                    <FlexDiv className="justify-between items-center">
                         <p className="text-sm font-semibold">키로수</p>
                         <p className="text-sm font-semibold text-gray-400">123,456km</p>
-                    </div>
-                    <div className="flex flex-col gap-2">
+                    </FlexDiv>
+                    <FlexDiv className="flex-col gap-2">
                         <p className="text-sm font-semibold">메모</p>
                         <Textarea />
-                    </div>
-                </div>
+                    </FlexDiv>
+                </FlexDiv>
             </ItemCard>
     </FlexDiv>
     )
