@@ -6,7 +6,7 @@ export default function SelectCar() {
             <SelectTrigger className="w-full">
                 <SelectValue placeholder="차량을 선택하세요" />
             </SelectTrigger>
-            <SelectContent>
+            <SelectContent position="item-aligned">
                 <SelectItem value="0">LF소나타 | 65보 6191</SelectItem>
                 <SelectItem value="1">투싼 | 62주 7767</SelectItem>
                 <SelectItem value="2">싼타페 | 12가 3456</SelectItem>

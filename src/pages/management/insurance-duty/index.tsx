@@ -7,35 +7,35 @@ import SelectCar from "@/components/SelectCar";
 export default function InsuranceDuty() {
     // 보험료/세금 페이지
     return (
-        <FlexDiv className="flex flex-col gap-4 p-4">
-            <div className="flex justify-center w-full">
+        <FlexDiv className="flex-col gap-4 p-4">
+            <FlexDiv className="justify-center w-full">
                 <SelectCar />
-            </div>
-            <div className="flex justify-center">
+            </FlexDiv>
+            <FlexDiv className="justify-center">
                 <AddButton to="/management/insurance-duty/add" />
-            </div>
+            </FlexDiv>
             <ItemCard
                 date="2025-06-21"
                 to="/management/insurance-duty/1"
             >
-                <div className="flex flex-col gap-2">
-                    <div className="flex justify-between items-center">
+                <FlexDiv className="flex-col gap-2">
+                    <FlexDiv className="justify-between items-center">
                         <p className="text-sm font-semibold">종류</p>
                         <p className="text-sm font-semibold text-gray-400">보험료</p>
-                    </div>
-                    <div className="flex justify-between items-center">
+                    </FlexDiv>
+                    <FlexDiv className="justify-between items-center">
                         <p className="text-sm font-semibold">금액</p>
                         <p className="text-sm font-semibold text-gray-400">100,000원</p>
-                    </div>
-                    <div className="flex justify-between items-center">
+                    </FlexDiv>
+                    <FlexDiv className="justify-between items-center">
                         <p className="text-sm font-semibold">보험사</p>
                         <p className="text-sm font-semibold text-gray-400">DB손해보험</p>
-                    </div>
-                    <div className="flex flex-col gap-2">
+                    </FlexDiv>
+                    <FlexDiv className="flex-col gap-2">
                         <p className="text-sm font-semibold">메모</p>
                         <Textarea />
-                    </div>
-                </div>
+                    </FlexDiv>
+                </FlexDiv>
             </ItemCard>
         </FlexDiv>
     )

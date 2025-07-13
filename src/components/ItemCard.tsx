@@ -17,12 +17,18 @@ export default function ItemCard({
             <CardHeader className="border-b border-gray-300">
                 <CardTitle className="text-sm font-semibold">{date}</CardTitle>
                 <CardAction>
-                    <Link
-                        to={to}
-                        className="text-sm font-semibold text-gray-400"
-                    >
-                        수정
-                    </Link>
+                    <FlexDiv className="h-full items-center text-sm text-gray-400 font-semibold gap-x-1">
+                        <Link to={to}>
+                            수정
+                        </Link>
+                        ·
+                        <span
+                            className="cursor-pointer"
+                            // onClick={handleDeleteCar}
+                        >
+                            삭제
+                        </span>
+                    </FlexDiv>
                 </CardAction>
             </CardHeader>
             <CardContent>

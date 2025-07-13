@@ -1,11 +1,15 @@
 import FlexDiv from "@/components/FlexDiv";
 import {Button} from "@/components/ui/button";
+// import { useEffect } from "react";
 
 export default function Login() {
+    // useEffect(() => {
+        
+    // }, []);
 
     const handleLogin = async () => {
-        // window.location.href = "https://carog-api.seoeungi.work/oauth2/authorization/kakao";
-        window.location.href = "http://localhost:8030/oauth2/authorization/kakao";
+        window.location.href = "https://carog-api.seoeungi.work/oauth2/authorization/kakao";
+        // window.location.href = "http://localhost:8030/oauth2/authorization/kakao";
     };
 
     return (
