@@ -1,10 +1,11 @@
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
+
 export default function SelectCar() {
     return (
         <Select defaultValue="0">
-            <SelectTrigger className="w-full">
-                <SelectValue placeholder="차량을 선택하세요" />
+            <SelectTrigger className="w-full rounded-full border-black font-semibold">
+                <SelectValue placeholder="차량을 선택하세요"/>
             </SelectTrigger>
             <SelectContent position="item-aligned">
                 <SelectItem value="0">LF소나타 | 65보 6191</SelectItem>
