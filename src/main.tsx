@@ -23,7 +23,7 @@ import InsuranceDutyId from '@/pages/management/insurance-duty/id'
 import ParkingFeeId from '@/pages/management/parking-fee/id'
 import { SidebarProvider } from '@/components/ui/sidebar'
 import Sidebar from '@/components/Sidebar'
-
+import KakaoLogin from './pages/user/login/kakao'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
@@ -35,6 +35,7 @@ createRoot(document.getElementById('root')!).render(
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/user/login/kakao" element={<KakaoLogin />} />
             <Route path="/my" element={<My />} />
             <Route path="/my/cars" element={<Cars />} />
             <Route path="/my/cars/:id" element={<Car />} />

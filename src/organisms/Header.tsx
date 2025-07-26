@@ -37,6 +37,10 @@ export default function Header() {
         }
     };
 
+    if (pathname === '/user/login/kakao') {
+        return null;
+    }
+
     return (
         <header className="fixed top-0 left-1/2 transform -translate-x-1/2 w-full max-w-120 h-14 flex items-center shadow-md px-4 bg-white">
             <FlexDiv className="relative w-full justify-between">
