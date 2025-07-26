@@ -20,12 +20,14 @@ export default function KakaoLogin() {
     };
 
     useEffect(() => {
-        if (code) {
-            handleKakaoCallback(code);
-        } else {
-            window.location.href = '/';
-        }
-    }, []);
+        (async () => {
+            if (code) {
+                await handleKakaoCallback(code);
+            } else {
+                window.location.href = '/';
+            }
+        })();
+    }, [code]);
 
     return (
         <></>
