@@ -4,7 +4,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 
-export default function InsuranceDutyId() {
+export default function InsuranceDutyAdd() {
     return (
         <FlexDiv className="flex-col gap-4 p-4">
             <FlexDiv className="flex-col gap-2">
@@ -24,7 +24,7 @@ export default function InsuranceDutyId() {
                 <Textarea id="memo" className="bg-white" />
             </FlexDiv>
             <FlexDiv className="justify-end gap-2">
-                <Button variant="default">저장</Button>
+                <Button variant="default">추가</Button>
                 <Button variant="outline">취소</Button>
             </FlexDiv>
         </FlexDiv>

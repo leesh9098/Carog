@@ -24,6 +24,13 @@ import ParkingFeeId from '@/pages/management/parking-fee/id'
 import { SidebarProvider } from '@/components/ui/sidebar'
 import Sidebar from '@/components/Sidebar'
 import KakaoLogin from './pages/auth/login/kakao'
+import AccidentAdd from './pages/management/accident/add'
+import EtcAdd from './pages/management/etc/add'
+import FuelAdd from './pages/management/fuel/add'
+import InstallmentAdd from './pages/management/installment/add'
+import InsuranceDutyAdd from './pages/management/insurance-duty/add'
+import MaintenanceHistoryAdd from './pages/management/maintenance-history/add'
+import ParkingFeeAdd from './pages/management/parking-fee/add'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
@@ -53,6 +60,13 @@ createRoot(document.getElementById('root')!).render(
             <Route path="/management/installment/:id" element={<InstallmentId />} />
             <Route path="/management/insurance-duty/:id" element={<InsuranceDutyId />} />
             <Route path="/management/parking-fee/:id" element={<ParkingFeeId />} />
+            <Route path="/management/accident/add" element={<AccidentAdd />} />
+            <Route path="/management/etc/add" element={<EtcAdd />} />
+            <Route path="/management/fuel/add" element={<FuelAdd />} />
+            <Route path="/management/installment/add" element={<InstallmentAdd />} />
+            <Route path="/management/insurance-duty/add" element={<InsuranceDutyAdd />} />
+            <Route path="/management/maintenance-history/add" element={<MaintenanceHistoryAdd />} />
+            <Route path="/management/parking-fee/add" element={<ParkingFeeAdd />} />
           </Routes>
         </div>
       </SidebarProvider>
