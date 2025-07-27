@@ -37,7 +37,7 @@ export default function Header() {
         }
     };
 
-    if (pathname === '/user/login/kakao') {
+    if (pathname === '/auth/login/kakao') {
         return null;
     }
 

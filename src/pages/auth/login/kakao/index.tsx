@@ -10,7 +10,7 @@ export default function KakaoLogin() {
 
     const handleKakaoCallback = async (code: string) => {
         try {
-            const response = await ax.post('/user/login/kakao', { code });
+            const response = await ax.post('/auth/login/kakao', { code });
             document.cookie = `token=${response.data.data.token}; path=/; max-age=3600;`;
             window.location.href = '/';
         } catch (error) {

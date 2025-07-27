@@ -38,7 +38,7 @@ export default function Sidebar() {
         }
     }, []);
 
-    if (pathname.pathname === '/user/login/kakao') {
+    if (pathname.pathname === '/auth/login/kakao') {
         return null;
     }
 
