@@ -3,8 +3,15 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function EtcId() {
+    const navigate = useNavigate();
+
+    const handleGoBack = () => {
+        navigate(-1);
+    };
+
     return (
         <FlexDiv className="flex-col gap-4 p-4">
             <FlexDiv className="flex-col gap-2">
@@ -20,8 +27,8 @@ export default function EtcId() {
                 <Textarea id="memo" className="bg-white" />
             </FlexDiv>
             <FlexDiv className="justify-end gap-2">
-                <Button variant="default">저장</Button>
-                <Button variant="outline">취소</Button>
+                <Button variant="default"><Link to="/management/etc">저장</Link></Button>
+                <Button variant="outline" onClick={handleGoBack}>취소</Button>
             </FlexDiv>
         </FlexDiv>
     )
