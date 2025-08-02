@@ -13,15 +13,21 @@ import {
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 import { ChevronDown } from "lucide-react";
-import { useEffect, useState } from "react";
-import { getCookie } from "@/lib/utils";
+import { useEffect } from "react";
+import { ax, getCookie } from "@/lib/utils";
+import { useSession } from "@/contexts/SessionContext";
 
 export default function Sidebar() {
-    const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
-
     const navigate = useNavigate();
     const pathname = useLocation();
     const isHome = pathname.pathname === '/';
+
+    const {
+        isLoggedIn,
+        user,
+        setIsLoggedIn,
+        setUser
+    } = useSession();
 
     const { setOpenMobile } = useSidebar();
 
@@ -31,12 +37,28 @@ export default function Sidebar() {
         navigate(to);
     };
 
+    const handleLogout = async () => {
+        const token = getCookie('token');
+        await ax.post('/auth/logout/kakao', null, {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        });
+        document.cookie = `token=; path=/; max-age=0;`;
+        setIsLoggedIn(false);
+        setUser(null);
+        setOpenMobile(false);
+        navigate('/');
+    };
+
     useEffect(() => {
         const token = getCookie('token');
         if (token) {
             setIsLoggedIn(true);
+        } else {
+            setIsLoggedIn(false);
         }
-    }, []);
+    }, [pathname]);
 
     if (pathname.pathname === '/auth/login/kakao') {
         return null;
@@ -47,8 +69,12 @@ export default function Sidebar() {
             {isLoggedIn ? (
                 <>
                     <SidebarHeader className="gap-0 border-b border-gray-300">
-                        <p className="font-semibold">이름</p>
-                        <p className="font-semibold text-gray-500">이메일</p>
+                        <p className="font-semibold">
+                            {user?.nickname}
+                        </p>
+                        <p className="font-semibold text-gray-500">
+                            {user?.email}
+                        </p>
                     </SidebarHeader>
                     <SidebarContent>
                         <SidebarGroup>
@@ -156,7 +182,7 @@ export default function Sidebar() {
                                 <SidebarMenuItem>
                                     <SidebarMenuButton
                                         className="font-semibold text-lg"
-                                        onClick={() => { }}
+                                        onClick={handleLogout}
                                     >
                                         로그아웃
                                     </SidebarMenuButton>

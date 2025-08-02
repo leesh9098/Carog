@@ -31,45 +31,48 @@ import InstallmentAdd from './pages/management/installment/add'
 import InsuranceDutyAdd from './pages/management/insurance-duty/add'
 import MaintenanceHistoryAdd from './pages/management/maintenance-history/add'
 import ParkingFeeAdd from './pages/management/parking-fee/add'
+import { SessionProvider } from './contexts/SessionContext'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <BrowserRouter>
-      <SidebarProvider>
-        <Header />
-        <Sidebar />
-        <div className='w-full mt-14'>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/auth/login/kakao" element={<KakaoLogin />} />
-            <Route path="/my" element={<My />} />
-            <Route path="/my/cars" element={<Cars />} />
-            <Route path="/my/cars/:id" element={<Car />} />
-            <Route path="/management/maintenance-history" element={<MaintenanceHistory />} />
-            <Route path="/management/fuel" element={<Fuel />} />
-            <Route path="/management/insurance-duty" element={<InsuranceDuty />} />
-            <Route path="/management/accident" element={<Accident />} />
-            <Route path="/management/installment" element={<Installment />} />
-            <Route path="/management/etc" element={<Etc />} />
-            <Route path="/management/parking-fee" element={<ParkingFee />} />
-            <Route path="/management/maintenance-history/:id" element={<MaintenanceHistoryId />} />
-            <Route path="/management/accident/:id" element={<AccidentId />} />
-            <Route path="/management/etc/:id" element={<EtcId />} />
-            <Route path="/management/fuel/:id" element={<FuelId />} />
-            <Route path="/management/installment/:id" element={<InstallmentId />} />
-            <Route path="/management/insurance-duty/:id" element={<InsuranceDutyId />} />
-            <Route path="/management/parking-fee/:id" element={<ParkingFeeId />} />
-            <Route path="/management/accident/add" element={<AccidentAdd />} />
-            <Route path="/management/etc/add" element={<EtcAdd />} />
-            <Route path="/management/fuel/add" element={<FuelAdd />} />
-            <Route path="/management/installment/add" element={<InstallmentAdd />} />
-            <Route path="/management/insurance-duty/add" element={<InsuranceDutyAdd />} />
-            <Route path="/management/maintenance-history/add" element={<MaintenanceHistoryAdd />} />
-            <Route path="/management/parking-fee/add" element={<ParkingFeeAdd />} />
-          </Routes>
-        </div>
-      </SidebarProvider>
+      <SessionProvider>
+        <SidebarProvider>
+          <Header />
+          <Sidebar />
+          <div className='w-full mt-14'>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/auth/login/kakao" element={<KakaoLogin />} />
+              <Route path="/my" element={<My />} />
+              <Route path="/my/cars" element={<Cars />} />
+              <Route path="/my/cars/:id" element={<Car />} />
+              <Route path="/management/maintenance-history" element={<MaintenanceHistory />} />
+              <Route path="/management/fuel" element={<Fuel />} />
+              <Route path="/management/insurance-duty" element={<InsuranceDuty />} />
+              <Route path="/management/accident" element={<Accident />} />
+              <Route path="/management/installment" element={<Installment />} />
+              <Route path="/management/etc" element={<Etc />} />
+              <Route path="/management/parking-fee" element={<ParkingFee />} />
+              <Route path="/management/maintenance-history/:id" element={<MaintenanceHistoryId />} />
+              <Route path="/management/accident/:id" element={<AccidentId />} />
+              <Route path="/management/etc/:id" element={<EtcId />} />
+              <Route path="/management/fuel/:id" element={<FuelId />} />
+              <Route path="/management/installment/:id" element={<InstallmentId />} />
+              <Route path="/management/insurance-duty/:id" element={<InsuranceDutyId />} />
+              <Route path="/management/parking-fee/:id" element={<ParkingFeeId />} />
+              <Route path="/management/accident/add" element={<AccidentAdd />} />
+              <Route path="/management/etc/add" element={<EtcAdd />} />
+              <Route path="/management/fuel/add" element={<FuelAdd />} />
+              <Route path="/management/installment/add" element={<InstallmentAdd />} />
+              <Route path="/management/insurance-duty/add" element={<InsuranceDutyAdd />} />
+              <Route path="/management/maintenance-history/add" element={<MaintenanceHistoryAdd />} />
+              <Route path="/management/parking-fee/add" element={<ParkingFeeAdd />} />
+            </Routes>
+          </div>
+        </SidebarProvider>
+      </SessionProvider>
     </BrowserRouter>
   </StrictMode>
 )
