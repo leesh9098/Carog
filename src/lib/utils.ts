@@ -7,7 +7,11 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 export const ax = axios.create({
-  baseURL: import.meta.env.VITE_API_URL
+  baseURL: "/api",
+  withCredentials: true,
+  headers: {
+      "Content-Type": "application/json"
+  }
 });
 
 export function getCookie(name: string) {
