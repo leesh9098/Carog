@@ -1,5 +1,6 @@
 import { ax, getCookie } from "@/lib/utils";
 import { createContext, useContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 interface SessionContextType {
     isLoggedIn: boolean;
@@ -28,12 +29,15 @@ export const SessionProvider = ({ children }: { children: React.ReactNode }) => 
         email: string;
     } | null>(null);
 
+    const navigate = useNavigate();
+
     useEffect(() => {
         const token = getCookie('token');
         if (token) {
             setIsLoggedIn(true);
         } else {
             setIsLoggedIn(false);
+            navigate("/");
         }
     }, []);
 
