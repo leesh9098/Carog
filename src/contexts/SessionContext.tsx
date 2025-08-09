@@ -15,7 +15,7 @@ interface SessionContextType {
     } | null) => void;
 }
 
-export const SessionContext = createContext<SessionContextType>({
+const SessionContext = createContext<SessionContextType>({
     isLoggedIn: false,
     user: null,
     setIsLoggedIn: () => {},
