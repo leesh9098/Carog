@@ -3,53 +3,78 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+// import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 // import { useForm } from "react-hook-form";
 import { ax, getCookie } from "@/lib/utils";
 import { Calendar } from "@/components/ui/calendar"
 import React, { useState } from "react";
 import { ChevronDown } from "lucide-react";
+import { useSelectedCar } from "@/contexts/SelectedCarContext";
+// import { z } from "zod";
+// import { zodResolver } from "@hookform/resolvers/zod";
 
-interface Maintenance {
-    item: string;
-    price: number;
-    kilometer: number;
-    company: string;
-    memo: string;
-    date: Date;
-}
+// interface Maintenance {
+//     carInfoId: number;
+//     item: string;
+//     price: string;
+//     mileage: string;
+//     company: string;
+//     memo: string;
+//     date: Date;
+// }
 
 export default function MaintenanceHistoryAdd() {
-    const token = getCookie('token');
-    console.log(`token`);
     const [date, setDate] = React.useState<Date | undefined>(new Date());
     const [isOpenCalendar, setIsOpenCalendar] = useState(false);
+    const [item, setItem] = useState("");
+    const [price, setPrice] = useState("");
+    const [mileage, setMileage] = useState("");
+    const [company, setCompany] = useState("");
+    const [memo, setMemo] = useState("");
+    const { selectedCar } = useSelectedCar();
     const navigate = useNavigate();
 
     const handleGoBack = () => {
         navigate(-1);
     };
 
-    // const form = useForm<Maintenance>({  
+    // const formSchema = z.object({
+    //     carInfoId: z.number(),
+    //     item: z.string().min(1),
+    //     price: z.string().min(1),
+    //     mileage: z.string().min(1),
+    //     company: z.string().min(1),
+    //     memo: z.string(),
+    //     date: z.date(),
+    // });
+
+    // const form = useForm<Maintenance>({
     //     defaultValues: {
+    //         carInfoId: selectedCar?.id,
     //         item: "",
-    //         price: 0,
-    //         kilometer: 0,
+    //         price: "",
+    //         mileage: "",
     //         company: "",
     //         memo: "",
+    //         date: date,
     //     },
-    // })
+    //     resolver: zodResolver(formSchema),
+    // });
 
-    async function handleAdd(values: Maintenance) {
-        console.log(values);
+
+    async function handleAdd(){
+        const token = getCookie("token");
+        console.log(token);
         try {
-            await ax.post("/maintenance", {
-                item: values.item,
-                price: values.price,
-                kilometer: values.kilometer,
-                company: values.company,
-                memo: values.memo,
-                date: values.date,
+            await ax.post(`/maintenance`, {
+                carInfoId: selectedCar?.id,
+                item,
+                price,
+                mileage,
+                company,
+                memo,
+                date,
             }, {
                 headers: {
                     Authorization: `Bearer ${token}`,
@@ -58,7 +83,7 @@ export default function MaintenanceHistoryAdd() {
         } catch (error) {
             console.error(error);
         }
-        window.location.reload();
+       // window.location.reload();
     }
 
     return (
@@ -83,26 +108,26 @@ export default function MaintenanceHistoryAdd() {
             </FlexDiv>
             <FlexDiv className="flex-col gap-2">
                 <Label className="text-sm font-semibold">항목</Label>
-                <Input id="item" placeholder="항목을 입력해주세요" />
+                <Input id="item" value={item} onChange={(e) => setItem(e.target.value)} placeholder="항목을 입력해주세요" />
             </FlexDiv>
             <FlexDiv className="flex-col gap-2">
                 <Label className="text-sm font-semibold">금액</Label>
-                <Input id="price" placeholder="0원" />
+                <Input id="price" value={price} onChange={(e) => setPrice(e.target.value)} placeholder="0원" />
             </FlexDiv>
             <FlexDiv className="flex-col gap-2">
-                <Label htmlFor="kilometer" className="text-sm font-semibold">키로수</Label>
-                <Input id="kilometer" placeholder="0km" />
+                <Label htmlFor="mileage" className="text-sm font-semibold">키로수</Label>
+                <Input id="mileage" value={mileage} onChange={(e) => setMileage(e.target.value)} placeholder="0km" />
             </FlexDiv>
             <FlexDiv className="flex-col gap-2">
                 <Label htmlFor="company" className="text-sm font-semibold">업체명</Label>
-                <Input id="company" placeholder="업체명을 입력해주세요" />
+                <Input id="company" value={company} onChange={(e) => setCompany(e.target.value)} placeholder="업체명을 입력해주세요" />
             </FlexDiv>
             <FlexDiv className="flex-col gap-2">
                 <Label htmlFor="memo" className="text-sm font-semibold">메모</Label>
-                <Textarea id="memo" className="bg-white" />
+                <Textarea id="memo" value={memo} onChange={(e) => setMemo(e.target.value)} className="bg-white" />
             </FlexDiv>
             <FlexDiv className="justify-end gap-2">
-                <Button variant="default" type="submit"><Link to="/management/maintenance-history">추가</Link></Button>
+                <Button variant="default" onClick={handleAdd}>추가</Button>
                 <Button variant="outline" onClick={handleGoBack}>취소</Button>
             </FlexDiv>
         </FlexDiv>
