@@ -2,26 +2,14 @@ import CarCard from "@/components/CarCard";
 import FlexDiv from "@/components/FlexDiv";
 import { Button } from "@/components/ui/button";
 import { useSession } from "@/contexts/SessionContext";
+import { useCarList } from "@/hooks/tanstackQuery/useCarList";
 import { ax, getCookie } from "@/lib/utils";
 import { Link, useNavigate } from "react-router-dom";
 
-const mockCarList = [
-    {
-        id: 1,
-        name: "LF소나타",
-        licensePlateNumber: "65보 6191",
-        isRepresentative: true
-    },
-    {
-        id: 2,
-        name: "모닝",
-        licensePlateNumber: "65보 6192",
-        isRepresentative: false
-    }
-];
-
 export default function My() {
     const navigate = useNavigate();
+
+    const { cars, isLoading } = useCarList();
 
     const {
         user,
@@ -75,7 +63,7 @@ export default function My() {
                     </Link>
                 </FlexDiv>
                 <FlexDiv className="flex-col gap-y-4">
-                    {mockCarList.map((car) => (
+                    {cars?.map((car) => (
                         <CarCard
                             key={car.id}
                             {...car}

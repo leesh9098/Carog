@@ -5,7 +5,7 @@ import Home from '@/pages'
 import Login from '@/pages/login'
 import My from '@/pages/my'
 import Cars from '@/pages/my/cars'
-import Car from '@/pages/my/cars/car'
+import Car from '@/pages/my/cars/id'
 import MaintenanceHistory from '@/pages/management/maintenance-history'
 import Fuel from '@/pages/management/fuel'
 import InsuranceDuty from '@/pages/management/insurance-duty'
@@ -35,6 +35,7 @@ import { SessionProvider } from './contexts/SessionContext'
 import ManagementLayout from './pages/management/layout'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { SelectedCarProvider } from './contexts/SelectedCarContext'
+import CarAdd from './pages/my/cars/add'
 
 const queryClient = new QueryClient();
 
@@ -55,6 +56,14 @@ createRoot(document.getElementById('root')!).render(
                   <Route path="/my" element={<My />} />
                   <Route path="/my/cars" element={<Cars />} />
                   <Route path="/my/cars/:id" element={<Car />} />
+                  <Route path="/my/cars/add" element={<CarAdd />} />
+                  <Route path="/management/maintenance-history/:id" element={<MaintenanceHistoryId />} />
+                  <Route path="/management/accident/:id" element={<AccidentId />} />
+                  <Route path="/management/etc/:id" element={<EtcId />} />
+                  <Route path="/management/fuel/:id" element={<FuelId />} />
+                  <Route path="/management/installment/:id" element={<InstallmentId />} />
+                  <Route path="/management/insurance-duty/:id" element={<InsuranceDutyId />} />
+                  <Route path="/management/parking-fee/:id" element={<ParkingFeeId />} />
                   <Route path="management" element={<ManagementLayout />}>
                     <Route path="/management/maintenance-history" element={<MaintenanceHistory />} />
                     <Route path="/management/fuel" element={<Fuel />} />
@@ -63,13 +72,6 @@ createRoot(document.getElementById('root')!).render(
                     <Route path="/management/installment" element={<Installment />} />
                     <Route path="/management/etc" element={<Etc />} />
                     <Route path="/management/parking-fee" element={<ParkingFee />} />
-                    <Route path="/management/maintenance-history/:id" element={<MaintenanceHistoryId />} />
-                    <Route path="/management/accident/:id" element={<AccidentId />} />
-                    <Route path="/management/etc/:id" element={<EtcId />} />
-                    <Route path="/management/fuel/:id" element={<FuelId />} />
-                    <Route path="/management/installment/:id" element={<InstallmentId />} />
-                    <Route path="/management/insurance-duty/:id" element={<InsuranceDutyId />} />
-                    <Route path="/management/parking-fee/:id" element={<ParkingFeeId />} />
                     <Route path="/management/accident/add" element={<AccidentAdd />} />
                     <Route path="/management/etc/add" element={<EtcAdd />} />
                     <Route path="/management/fuel/add" element={<FuelAdd />} />

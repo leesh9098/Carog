@@ -8,14 +8,14 @@ export default function CarCard({
     isDetailPage = false,
     id,
     name,
-    licensePlateNumber,
-    isRepresentative
+    number,
+    represent
 }: {
     isDetailPage?: boolean;
     id: number;
     name: string;
-    licensePlateNumber: string;
-    isRepresentative: boolean;
+    number: string;
+    represent: boolean;
 }) {
     const handleSetRepresentative = async () => {
 
@@ -29,7 +29,7 @@ export default function CarCard({
         <Card className="w-full py-4 gap-y-2">
             <CardHeader className="items-center px-4 gap-0">
                 <CardTitle>
-                    {isRepresentative ? (
+                    {represent ? (
                         <Badge className="text-xs font-semibold px-[6px]">대표</Badge>
                     ) : (
                         <p
@@ -62,7 +62,7 @@ export default function CarCard({
                     {name}
                 </p>
                 <LicensePlate
-                    licensePlateNumber={licensePlateNumber}
+                    licensePlateNumber={number}
                     className="mx-auto"
                 />
             </CardContent>
