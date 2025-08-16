@@ -3,24 +3,52 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Calendar } from "@/components/ui/calendar"
 import React, { useState } from "react";
 import { ChevronDown } from "lucide-react";
+import { ax, getCookie } from "@/lib/utils";
+import { useSelectedCar } from "@/contexts/SelectedCarContext";
 
 export default function InsuranceDutyAdd() {
     const [date, setDate] = React.useState<Date | undefined>(new Date());
     const [isOpenCalendar, setIsOpenCalendar] = useState(false);
+    const { selectedCar } = useSelectedCar();
+    const [type, setType] = useState("");
+    const [price, setPrice] = useState("");
+    const [company, setCompany] = useState("");
+    const [memo, setMemo] = useState("");
     const navigate = useNavigate();
 
     const handleGoBack = () => {
         navigate(-1);
     };
 
+    async function handleAdd(){
+        const token = getCookie("token");
+        console.log(token);
+        try {
+            await ax.post(`/insurance`, {
+                carInfoId: selectedCar?.id,
+                type,
+                price,
+                company,
+                memo,
+                date,
+            }, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
     return (
         <FlexDiv className="flex-col gap-4 p-4">
             <FlexDiv className="justify-between items-center gap-2">
-                {date === null ?
+                {date === undefined ?
                 <Label className="text-sm font-semibold">날짜 선택</Label>
                 : <Label className="text-sm font-semibold">{date?.toLocaleDateString()}</Label>
                 }
@@ -39,22 +67,22 @@ export default function InsuranceDutyAdd() {
             </FlexDiv>
             <FlexDiv className="flex-col gap-2">
                 <Label className="text-sm font-semibold">종류</Label>
-                <Input id="type" placeholder="보험료 / 세금" />
+                <Input id="type" value={type} onChange={(e) => setType(e.target.value)} placeholder="보험료 / 세금" />
             </FlexDiv>
             <FlexDiv className="flex-col gap-2">
                 <Label className="text-sm font-semibold">금액</Label>
-                <Input id="price" placeholder="0원" />
+                <Input id="price" value={price} onChange={(e) => setPrice(e.target.value)} placeholder="0원" />
             </FlexDiv>
             <FlexDiv className="flex-col gap-2">
                 <Label className="text-sm font-semibold">업체명</Label>
-                <Input id="company" placeholder="업체명을 입력해주세요" />
+                <Input id="company" value={company} onChange={(e) => setCompany(e.target.value)} placeholder="업체명을 입력해주세요" />
             </FlexDiv>
             <FlexDiv className="flex-col gap-2">
                 <Label className="text-sm font-semibold">메모</Label>
-                <Textarea id="memo" className="bg-white" />
+                <Textarea id="memo" value={memo} onChange={(e) => setMemo(e.target.value)} className="bg-white" />
             </FlexDiv>
             <FlexDiv className="justify-end gap-2">
-                <Button variant="default"><Link to="/management/insurance-duty">추가</Link></Button>
+                <Button variant="default" onClick={handleAdd}>추가</Button>
                 <Button variant="outline" onClick={handleGoBack}>취소</Button>
             </FlexDiv>
         </FlexDiv>

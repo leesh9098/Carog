@@ -64,7 +64,7 @@ export default function MaintenanceHistoryAdd() {
 
 
     async function handleAdd(){
-        const token = getCookie("token");
+        const token = getCookie(`token`);
         console.log(token);
         try {
             await ax.post(`/maintenance`, {
@@ -89,7 +89,7 @@ export default function MaintenanceHistoryAdd() {
     return (
         <FlexDiv className="flex-col gap-4 p-4">
             <FlexDiv className="justify-between items-center gap-2">
-                {date === null ?
+                {date === undefined ?
                 <Label className="text-sm font-semibold">날짜 선택</Label>
                 : <Label className="text-sm font-semibold">{date?.toLocaleDateString()}</Label>
                 }

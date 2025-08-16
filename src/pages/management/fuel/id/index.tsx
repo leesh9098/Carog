@@ -21,7 +21,7 @@ export default function FuelId() {
         <FlexDiv className="flex-col gap-4 p-4">
             <FlexDiv className="flex-col gap-2">
             <FlexDiv className="justify-between items-center gap-2">
-                {date === null ?
+                {date === undefined ?
                 <Label className="text-sm font-semibold">날짜 선택</Label>
                 : <Label className="text-sm font-semibold">{date?.toLocaleDateString()}</Label>
                 }
