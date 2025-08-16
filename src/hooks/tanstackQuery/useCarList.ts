@@ -17,7 +17,7 @@ export function useCarList() {
                 }
             });
 
-            return v.parse(v.array(carListSchema), data.data.content);
+            return v.parse(v.array(carListSchema), data.data);
         },
         retry: false
     })
