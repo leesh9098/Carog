@@ -3,44 +3,58 @@ import AddButton from "@/molecules/AddButton";
 import ItemCard from "@/components/ItemCard";
 import { Textarea } from "@/components/ui/textarea";
 import SelectCar from "@/components/SelectCar";
+import { useAccidentList } from "@/hooks/tanstackQuery/useAccidentList";
 
 export default function Accident() {
     // 사고 페이지
+
+    const { accidentList, isLoading } = useAccidentList();
+
     return (
         <FlexDiv className="flex-col gap-4 p-4">
-            <FlexDiv className="justify-center w-full">
-                <SelectCar />
-            </FlexDiv>
             <FlexDiv className="justify-center">
                 <AddButton to="/management/accident/add" />
             </FlexDiv>
-            <ItemCard
-                date="2025-06-21"
-                to="/management/accident/1"
-            >
-                <FlexDiv className="flex-col gap-2">
-                    <FlexDiv className="justify-between items-center">
-                        <p className="text-sm font-semibold">종류</p>
-                        <p className="text-sm font-semibold text-gray-400">피해</p>
-                    </FlexDiv>
-                    <FlexDiv className="justify-between items-center">
-                        <p className="text-sm font-semibold">금액</p>
-                        <p className="text-sm font-semibold text-gray-400">3,000,000원</p>
-                    </FlexDiv>
-                    <FlexDiv className="justify-between items-center">
-                        <p className="text-sm font-semibold">보험사</p>
-                        <p className="text-sm font-semibold text-gray-400">DB손해보험</p>
-                    </FlexDiv>
-                    <FlexDiv className="justify-between items-center">
-                        <p className="text-sm font-semibold">기타금액</p>
-                        <p className="text-sm font-semibold text-gray-400">3,000,000원</p>
-                    </FlexDiv>
+            {accidentList?.map(accident => (
+                <ItemCard
+                    key={accident.id}
+                    date={accident.date}
+                    to={`/management/accident/${accident.id}`}
+                >
                     <FlexDiv className="flex-col gap-2">
-                        <p className="text-sm font-semibold">메모</p>
-                        <Textarea />
+                        <FlexDiv className="justify-between items-center">
+                            <p className="text-sm font-semibold">종류</p>
+                            <p className="text-sm font-semibold text-gray-400">
+                                {accident.type}
+                            </p>
+                        </FlexDiv>
+                        <FlexDiv className="justify-between items-center">
+                            <p className="text-sm font-semibold">금액</p>
+                            <p className="text-sm font-semibold text-gray-400">
+                                {accident.price.toLocaleString()}원
+                            </p>
+                        </FlexDiv>
+                        <FlexDiv className="justify-between items-center">
+                            <p className="text-sm font-semibold">보험사</p>
+                            <p className="text-sm font-semibold text-gray-400">
+                                {accident.company}
+                            </p>
+                        </FlexDiv>
+                        <FlexDiv className="justify-between items-center">
+                            <p className="text-sm font-semibold">기타금액</p>
+                            <p className="text-sm font-semibold text-gray-400">
+                                {accident.additionalPrice.toLocaleString()}원
+                            </p>
+                        </FlexDiv>
+                        {accident.memo && (
+                            <FlexDiv className="flex-col gap-2">
+                                <p className="text-sm font-semibold">메모</p>
+                                <Textarea value={accident.memo} disabled />
+                            </FlexDiv>
+                        )}
                     </FlexDiv>
-                </FlexDiv>
-            </ItemCard>
+                </ItemCard>
+            ))}
         </FlexDiv>
     )
 }

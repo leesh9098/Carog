@@ -7,4 +7,63 @@ export const carListSchema = v.object({
     represent: v.boolean()
 });
 
+export const maintenanceHistoryListSchema = v.object({
+    id: v.number(),
+    carInfoId: v.number(),
+    item: v.string(),
+    price: v.number(),
+    mileage: v.number(),
+    company: v.string(),
+    memo: v.nullable(v.string()),
+    date: v.string(),
+    time: v.nullable(v.string())
+});
+
+export const fuelListSchema = v.object({
+    id: v.number(),
+    carInfoId: v.number(),
+    type: v.string(),
+    price: v.number(),
+    liter: v.string(),
+    unit: v.number(),
+    company: v.string(),
+    range: v.number(),
+    memo: v.nullable(v.string()),
+    date: v.string(),
+    time: v.nullable(v.string())
+});
+
+export const insuranceDutyListSchema = v.object({
+    id: v.number(),
+    carInfoId: v.number(),
+    type: v.string(),
+    price: v.number(),
+    company: v.string(),
+    memo: v.nullable(v.string()),
+    date: v.string(),
+    time: v.nullable(v.string())
+});
+
+export const accidentListSchema = v.object({
+    id: v.number(),
+    carInfoId: v.number(),
+    type: v.string(),
+    price: v.number(),
+    company: v.string(),
+    additionalPrice: v.number(),
+    memo: v.nullable(v.string()),
+    date: v.string(),
+    time: v.nullable(v.string())
+});
+
+export const installmentListSchema = v.object({
+    id: v.number(),
+    carInfoId: v.number(),
+    price: v.number(),
+    monthly: v.number(),
+    round: v.number(),
+    memo: v.nullable(v.string()),
+    date: v.string()
+});
+
 export type CarList = v.InferOutput<typeof carListSchema>;

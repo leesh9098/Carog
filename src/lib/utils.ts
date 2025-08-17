@@ -22,3 +22,34 @@ export function getCookie(name: string) {
   }
   return null;
 }
+
+export function getFuelType(type: string) {
+  switch (type) {
+    case "gasoline":
+      return "휘발유";
+    case "diesel":
+      return "경유";
+    case "lpg":
+      return "LPG";
+    case "premium gasoline":
+      return "고급 휘발유";
+  }
+}
+
+export function getInsuranceDutyType(type: string) {
+  switch (type) {
+    case "insurance":
+      return "보험료";
+    case "duty":
+      return "세금";
+  }
+}
+
+export function getAccidentType(type: string) {
+  switch (type) {
+    case "perpetrator":
+      return "가해";
+    case "damage":
+      return "피해";
+  }
+}

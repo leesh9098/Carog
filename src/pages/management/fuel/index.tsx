@@ -2,49 +2,62 @@ import FlexDiv from "@/components/FlexDiv";
 import AddButton from "@/molecules/AddButton";
 import ItemCard from "@/components/ItemCard";
 import { Textarea } from "@/components/ui/textarea";
-import SelectCar from "@/components/SelectCar";
+import { useFuelList } from "@/hooks/tanstackQuery/useFuelList";
 
 export default function Fuel() {
-    // 유류비 페이지
+    const { fuelList, isLoading } = useFuelList();
+
     return (
         <FlexDiv className="flex-col gap-4 p-4">
-            <FlexDiv className="justify-center w-full">
-                <SelectCar />
-            </FlexDiv>
             <FlexDiv className="justify-center">
                 <AddButton to="/management/fuel/add" />
             </FlexDiv>
-            <ItemCard
-                date="2025-06-21"
-                to="/management/fuel/1"
-            >
-                <FlexDiv className="flex-col gap-2">
-                    <FlexDiv className="justify-between items-center">
-                        <p className="text-sm font-semibold">유종</p>
-                        <p className="text-sm font-semibold text-gray-400">휘발유</p>
-                    </FlexDiv>
-                    <FlexDiv className="justify-between items-center">
-                        <p className="text-sm font-semibold">금액</p>
-                        <p className="text-sm font-semibold text-gray-400">100,000원</p>
-                    </FlexDiv>
-                    <FlexDiv className="justify-between items-center">
-                        <p className="text-sm font-semibold">리터수</p>
-                        <p className="text-sm font-semibold text-gray-400">40L</p>
-                    </FlexDiv>
-                    <FlexDiv className="justify-between items-center">
-                        <p className="text-sm font-semibold">업체명</p>
-                        <p className="text-sm font-semibold text-gray-400">현대셀프주유소</p>
-                    </FlexDiv>
-                    <FlexDiv className="justify-between items-center">
-                        <p className="text-sm font-semibold">키로수</p>
-                        <p className="text-sm font-semibold text-gray-400">123,456km</p>
-                    </FlexDiv>
+            {fuelList?.map(fuel => (
+                <ItemCard
+                    key={fuel.id}
+                    date={fuel.date}
+                    to={`/management/fuel/${fuel.id}`}
+                >
                     <FlexDiv className="flex-col gap-2">
-                        <p className="text-sm font-semibold">메모</p>
-                        <Textarea />
+                        <FlexDiv className="justify-between items-center">
+                            <p className="text-sm font-semibold">유종</p>
+                            <p className="text-sm font-semibold text-gray-400">
+                                {fuel.type}
+                            </p>
+                        </FlexDiv>
+                        <FlexDiv className="justify-between items-center">
+                            <p className="text-sm font-semibold">금액</p>
+                            <p className="text-sm font-semibold text-gray-400">
+                                {fuel.price.toLocaleString()}원
+                            </p>
+                        </FlexDiv>
+                        <FlexDiv className="justify-between items-center">
+                            <p className="text-sm font-semibold">리터수</p>
+                            <p className="text-sm font-semibold text-gray-400">
+                                {fuel.liter}L
+                            </p>
+                        </FlexDiv>
+                        <FlexDiv className="justify-between items-center">
+                            <p className="text-sm font-semibold">업체명</p>
+                            <p className="text-sm font-semibold text-gray-400">
+                                {fuel.company}
+                            </p>
+                        </FlexDiv>
+                        <FlexDiv className="justify-between items-center">
+                            <p className="text-sm font-semibold">키로수</p>
+                            <p className="text-sm font-semibold text-gray-400">
+                                {fuel.range.toLocaleString()}km
+                            </p>
+                        </FlexDiv>
+                        {fuel.memo && (
+                            <FlexDiv className="flex-col gap-2">
+                                <p className="text-sm font-semibold">메모</p>
+                                <Textarea value={fuel.memo} disabled />
+                            </FlexDiv>
+                        )}
                     </FlexDiv>
-                </FlexDiv>
-            </ItemCard>
+                </ItemCard>
+            ))}
     </FlexDiv>
     )
 }
