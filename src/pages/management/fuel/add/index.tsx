@@ -75,24 +75,24 @@ export default function FuelAdd() {
                 <Input id="type" value={type} onChange={(e) => setType(e.target.value)} placeholder="휘발유/경유/LPG" />
             </FlexDiv>
             <FlexDiv className="flex-col gap-2">
-                <Label htmlFor="price" className="text-sm font-semibold">금액</Label>
-                <Input id="price" value={price} onChange={(e) => setPrice(e.target.value)} placeholder="0원" />
+                <Label htmlFor="price" className="text-sm font-semibold">금액(원)</Label>
+                <Input id="price" value={price} onChange={(e) => setPrice(e.target.value)} placeholder="0" />
             </FlexDiv>
             <FlexDiv className="flex-col gap-2">
-                <Label htmlFor="liter" className="text-sm font-semibold">리터수</Label>
-                <Input id="liter" value={liter} onChange={(e) => setLiter(e.target.value)} placeholder="0L" />
+                <Label htmlFor="liter" className="text-sm font-semibold">리터수(L)</Label>
+                <Input id="liter" value={liter} onChange={(e) => setLiter(e.target.value)} placeholder="0" />
             </FlexDiv>
             <FlexDiv className="flex-col gap-2">
-                <Label htmlFor="price" className="text-sm font-semibold">단가</Label>
-                <Input id="price" value={unit} onChange={(e) => setUnit(e.target.value)} placeholder="0원" />
+                <Label htmlFor="price" className="text-sm font-semibold">단가(원)</Label>
+                <Input id="price" value={unit} onChange={(e) => setUnit(e.target.value)} placeholder="0" />
             </FlexDiv>
             <FlexDiv className="flex-col gap-2">
                 <Label htmlFor="company" className="text-sm font-semibold">업체명</Label>
                 <Input id="company" value={company} onChange={(e) => setCompany(e.target.value)} placeholder="업체명을 입력해주세요" />
             </FlexDiv>
             <FlexDiv className="flex-col gap-2">
-                <Label htmlFor="kilometer" className="text-sm font-semibold">키로수</Label>
-                <Input id="kilometer" value={range} onChange={(e) => setRange(e.target.value)} placeholder="0km" />
+                <Label htmlFor="kilometer" className="text-sm font-semibold">키로수(km)</Label>
+                <Input id="kilometer" value={range} onChange={(e) => setRange(e.target.value)} placeholder="0" />
             </FlexDiv>
             <FlexDiv className="flex-col gap-2">
                 <Label htmlFor="memo" className="text-sm font-semibold">메모</Label>

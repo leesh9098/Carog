@@ -42,8 +42,8 @@ export default function InsuranceDutyId() {
                 <Input id="type" placeholder="보험료 / 세금" />
             </FlexDiv>
             <FlexDiv className="flex-col gap-2">
-                <Label htmlFor="price" className="text-sm font-semibold">금액</Label>
-                <Input id="price" placeholder="0원" />
+                <Label htmlFor="price" className="text-sm font-semibold">금액(원)</Label>
+                <Input id="price" placeholder="0" />
             </FlexDiv>
             <FlexDiv className="flex-col gap-2">
                 <Label htmlFor="company" className="text-sm font-semibold">업체명</Label>

@@ -95,16 +95,16 @@ export default function AccidentId() {
                 <Input id="type" value={type} onChange={(e) => setType(e.target.value)} defaultValue={type} placeholder="종류를 입력해주세요" />
             </FlexDiv>
             <FlexDiv className="flex-col gap-2">
-                <Label htmlFor="price" className="text-sm font-semibold">금액</Label>
-                <Input id="price" value={price} onChange={(e) => setPrice(e.target.value)} defaultValue={price} placeholder="0원" />
+                <Label htmlFor="price" className="text-sm font-semibold">금액(원)</Label>
+                <Input id="price" value={price} onChange={(e) => setPrice(e.target.value)} defaultValue={price} placeholder="0" />
             </FlexDiv>
             <FlexDiv className="flex-col gap-2">
                 <Label htmlFor="insurance" className="text-sm font-semibold">보험사</Label>
                 <Input id="insurance" value={company} onChange={(e) => setCompany(e.target.value)} defaultValue={company} placeholder="보험사를 입력해주세요" />
             </FlexDiv>
             <FlexDiv className="flex-col gap-2">
-                <Label htmlFor="etc" className="text-sm font-semibold">기타금액</Label>
-                <Input id="etc" value={additionalPrice} onChange={(e) => setAdditionalPrice(e.target.value)} defaultValue={additionalPrice} placeholder="0원" />
+                <Label htmlFor="etc" className="text-sm font-semibold">기타금액(원)</Label>
+                <Input id="etc" value={additionalPrice} onChange={(e) => setAdditionalPrice(e.target.value)} defaultValue={additionalPrice} placeholder="0" />
             </FlexDiv>
             <FlexDiv className="flex-col gap-2">
                 <Label htmlFor="memo" className="text-sm font-semibold">메모</Label>

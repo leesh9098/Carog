@@ -72,16 +72,16 @@ export default function AccidentAdd() {
                 <Input id="type" value={type} onChange={(e) => setType(e.target.value)} placeholder="종류를 입력해주세요" />
             </FlexDiv>
             <FlexDiv className="flex-col gap-2">
-                <Label htmlFor="price" className="text-sm font-semibold">금액</Label>
-                <Input id="price" value={price} onChange={(e) => setPrice(e.target.value)} placeholder="0원" />
+                <Label htmlFor="price" className="text-sm font-semibold">금액(원)</Label>
+                <Input id="price" value={price} onChange={(e) => setPrice(e.target.value)} placeholder="0" />
             </FlexDiv>
             <FlexDiv className="flex-col gap-2">
                 <Label htmlFor="insurance" className="text-sm font-semibold">보험사</Label>
                 <Input id="company" value={company} onChange={(e) => setCompany(e.target.value)} placeholder="보험사를 입력해주세요" />
             </FlexDiv>
             <FlexDiv className="flex-col gap-2">
-                <Label htmlFor="additionalPrice" className="text-sm font-semibold">기타금액</Label>
-                <Input id="additionalPrice" value={additionalPrice} onChange={(e) => setAdditionalPrice(e.target.value)} placeholder="0원" />
+                <Label htmlFor="additionalPrice" className="text-sm font-semibold">기타금액(원)</Label>
+                <Input id="additionalPrice" value={additionalPrice} onChange={(e) => setAdditionalPrice(e.target.value)} placeholder="0" />
             </FlexDiv>
             <FlexDiv className="flex-col gap-2">
                 <Label htmlFor="memo" className="text-sm font-semibold">메모</Label>

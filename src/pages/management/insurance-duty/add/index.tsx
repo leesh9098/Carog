@@ -70,8 +70,8 @@ export default function InsuranceDutyAdd() {
                 <Input id="type" value={type} onChange={(e) => setType(e.target.value)} placeholder="보험료 / 세금" />
             </FlexDiv>
             <FlexDiv className="flex-col gap-2">
-                <Label className="text-sm font-semibold">금액</Label>
-                <Input id="price" value={price} onChange={(e) => setPrice(e.target.value)} placeholder="0원" />
+                <Label className="text-sm font-semibold">금액(원)</Label>
+                <Input id="price" value={price} onChange={(e) => setPrice(e.target.value)} placeholder="0" />
             </FlexDiv>
             <FlexDiv className="flex-col gap-2">
                 <Label className="text-sm font-semibold">업체명</Label>

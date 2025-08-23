@@ -38,12 +38,16 @@ export default function InstallmentId() {
             )}
             </FlexDiv>            
             <FlexDiv className="flex-col gap-2">
-                <Label htmlFor="price" className="text-sm font-semibold">금액</Label>
-                <Input id="price" placeholder="0원" />
+                <Label htmlFor="price" className="text-sm font-semibold">금액(원)</Label>
+                <Input id="price" placeholder="0" />
             </FlexDiv>
             <FlexDiv className="flex-col gap-2">
-                <Label htmlFor="payment" className="text-sm font-semibold">납부/전체</Label>
-                <Input id="payment" placeholder="1 / 60" />
+                <Label htmlFor="monthly" className="text-sm font-semibold">할부(개월)</Label>
+                <Input id="monthly" placeholder="0" />
+            </FlexDiv>
+            <FlexDiv className="flex-col gap-2">
+                <Label htmlFor="round" className="text-sm font-semibold">납부 횟수</Label>
+                <Input id="round" placeholder="0" />
             </FlexDiv>
             <FlexDiv className="flex-col gap-2">
                 <Label htmlFor="memo" className="text-sm font-semibold">메모</Label>

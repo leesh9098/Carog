@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { useNavigate, useParams } from "react-router-dom";
 import { Calendar } from "@/components/ui/calendar"
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { ChevronDown } from "lucide-react";
 import { ax, getCookie } from "@/lib/utils";
 import { useSelectedCar } from "@/contexts/SelectedCarContext";
@@ -18,16 +18,19 @@ export default function MaintenanceHistoryId() {
     const [mileage, setMileage] = useState("");
     const [company, setCompany] = useState("");
     const [memo, setMemo] = useState("");
+    const [requestMaintenance, setRequestMaintenance] = useState<any>("");
     const navigate = useNavigate();
     const { selectedCar } = useSelectedCar();
     const { id } = useParams();
 
-    const handleGet = async () => {
+    useEffect(() => {
+    async function fetchMaintenance(){
         const token = getCookie(`token`);
         try {
-            await ax.get(`/maintenance/list/${selectedCar?.id}`, {
+            const response = await ax.get(`/maintenance/list/${selectedCar?.id}`, {
                 params: {
                     carInfoId: selectedCar?.id,
+                    id,
                     item,
                     price,
                     mileage,
@@ -39,10 +42,16 @@ export default function MaintenanceHistoryId() {
                     Authorization: `Bearer ${token}`,
                 },
             });
+            setRequestMaintenance(response.data);
+            console.log(response.data);
         } catch (error) {
             console.error(error);
         }
     }
+        Promise.all([
+            fetchMaintenance(),
+        ]);
+    }, []);
 
     async function handleUpdate(){
         const token = getCookie(`token`);
@@ -82,7 +91,7 @@ export default function MaintenanceHistoryId() {
             {isOpenCalendar && (
                 <Calendar
                     mode="single"
-                    selected={date}
+                    selected={requestMaintenance?.date}
                     onSelect={setDate}
                     className="absolute right-0 z-10 bg-white shadow-md rounded-md"
                     captionLayout="dropdown"
@@ -91,26 +100,26 @@ export default function MaintenanceHistoryId() {
             </FlexDiv>
             <FlexDiv className="flex-col gap-2">
                 <Label htmlFor="item" className="text-sm font-semibold">항목</Label>
-                <Input id="item" value={item} onChange={(e) => setItem(e.target.value)} placeholder="항목을 입력해주세요" />
+                <Input id="item" value={item} defaultValue={requestMaintenance?.item} onChange={(e) => setItem(e.target.value)} placeholder="항목을 입력해주세요" />
             </FlexDiv>
             <FlexDiv className="flex-col gap-2">
-                <Label htmlFor="price" className="text-sm font-semibold">금액</Label>
-                <Input id="price" value={price} onChange={(e) => setPrice(e.target.value)} placeholder="0원" />
+                <Label htmlFor="price" className="text-sm font-semibold">금액(원)</Label>
+                <Input id="price" value={price} defaultValue={requestMaintenance?.price} onChange={(e) => setPrice(e.target.value)} placeholder="0원" />
             </FlexDiv>
             <FlexDiv className="flex-col gap-2">
-                <Label htmlFor="kilometer" className="text-sm font-semibold">키로수</Label>
-                <Input id="kilometer" value={mileage} onChange={(e) => setMileage(e.target.value)} placeholder="0km" />
+                <Label htmlFor="kilometer" className="text-sm font-semibold">키로수(km)</Label>
+                <Input id="kilometer" value={mileage} defaultValue={requestMaintenance?.mileage} onChange={(e) => setMileage(e.target.value)} placeholder="0" />
             </FlexDiv>
             <FlexDiv className="flex-col gap-2">
                 <Label htmlFor="company" className="text-sm font-semibold">업체명</Label>
-                <Input id="company" value={company} onChange={(e) => setCompany(e.target.value)} placeholder="업체명을 입력해주세요" />
+                <Input id="company" value={company} defaultValue={requestMaintenance?.company} onChange={(e) => setCompany(e.target.value)} placeholder="업체명을 입력해주세요" />
             </FlexDiv>
             <FlexDiv className="flex-col gap-2">
                 <Label htmlFor="memo" className="text-sm font-semibold">메모</Label>
-                <Textarea id="memo" value={memo} onChange={(e) => setMemo(e.target.value)} className="bg-white" />
+                <Textarea id="memo" value={memo} defaultValue={requestMaintenance?.memo} onChange={(e) => setMemo(e.target.value)} className="bg-white" />
             </FlexDiv>
             <FlexDiv className="justify-end gap-2">
-                <Button variant="default" onClick={() => handleUpdate()}>저장</Button>
+                <Button variant="default" onClick={handleUpdate}>저장</Button>
                 <Button variant="outline" onClick={handleGoBack}>취소</Button>
             </FlexDiv>
         </FlexDiv>

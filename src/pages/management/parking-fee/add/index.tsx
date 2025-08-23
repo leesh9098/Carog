@@ -3,19 +3,43 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Calendar } from "@/components/ui/calendar"
 import React, { useState } from "react";
 import { ChevronDown } from "lucide-react";
+import { ax, getCookie } from "@/lib/utils";
+import { useSelectedCar } from "@/contexts/SelectedCarContext";
 
 export default function ParkingFeeAdd() {
     const [date, setDate] = React.useState<Date | undefined>(new Date());
+    const [price, setPrice] = useState("");
+    const [memo, setMemo] = useState("");
     const [isOpenCalendar, setIsOpenCalendar] = useState(false);
+    const { selectedCar } = useSelectedCar();
     const navigate = useNavigate();
 
     const handleGoBack = () => {
         navigate(-1);
     };
+
+    async function handleAdd(){
+        const token = getCookie(`token`);
+        console.log(token);
+        try {
+            await ax.post(`/parking`, {
+                carInfoId: selectedCar?.id,
+                price,
+                memo,
+                date,
+            }, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
+        } catch (error) {
+            console.error(error);
+        }
+    }
 
     return (
         <FlexDiv className="flex-col gap-4 p-4">
@@ -38,15 +62,15 @@ export default function ParkingFeeAdd() {
             )}
             </FlexDiv>
             <FlexDiv className="flex-col gap-2">
-                <Label htmlFor="price" className="text-sm font-semibold">금액</Label>
-                <Input id="price" placeholder="0원" />
+                <Label htmlFor="price" className="text-sm font-semibold">금액(원)</Label>
+                <Input id="price" placeholder="0" value={price} onChange={(e) => setPrice(e.target.value)} />
             </FlexDiv>
             <FlexDiv className="flex-col gap-2">
                 <Label htmlFor="memo" className="text-sm font-semibold">메모</Label>
-                <Textarea id="memo" className="bg-white" />
+                <Textarea id="memo" className="bg-white" value={memo} onChange={(e) => setMemo(e.target.value)} />
             </FlexDiv>
             <FlexDiv className="justify-end gap-2">
-                <Button variant="default"><Link to="/management/parking-fee">추가</Link></Button>
+                <Button variant="default" onClick={handleAdd}>추가</Button>
                 <Button variant="outline" onClick={handleGoBack}>취소</Button>
             </FlexDiv>
         </FlexDiv>
