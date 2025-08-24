@@ -11,7 +11,7 @@ export default function InsuranceDuty() {
     const { insuranceDutyList, isLoading } = useInsuranceDutyList();
 
     return (
-        <FlexDiv className="flex-col gap-4 p-4">
+        <>
             <FlexDiv className="justify-center">
                 <AddButton to="/management/insurance-duty/add" />
             </FlexDiv>
@@ -49,6 +49,6 @@ export default function InsuranceDuty() {
                     </FlexDiv>
                 </ItemCard>
             ))}
-        </FlexDiv>
+        </>
     )
 }

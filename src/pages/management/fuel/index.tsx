@@ -8,7 +8,7 @@ export default function Fuel() {
     const { fuelList, isLoading } = useFuelList();
 
     return (
-        <FlexDiv className="flex-col gap-4 p-4">
+        <>
             <FlexDiv className="justify-center">
                 <AddButton to="/management/fuel/add" />
             </FlexDiv>
@@ -58,6 +58,6 @@ export default function Fuel() {
                     </FlexDiv>
                 </ItemCard>
             ))}
-    </FlexDiv>
+        </>
     )
 }

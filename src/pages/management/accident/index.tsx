@@ -11,7 +11,7 @@ export default function Accident() {
     const { accidentList, isLoading } = useAccidentList();
 
     return (
-        <FlexDiv className="flex-col gap-4 p-4">
+        <>
             <FlexDiv className="justify-center">
                 <AddButton to="/management/accident/add" />
             </FlexDiv>
@@ -55,6 +55,6 @@ export default function Accident() {
                     </FlexDiv>
                 </ItemCard>
             ))}
-        </FlexDiv>
+        </>
     )
 }

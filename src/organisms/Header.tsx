@@ -46,6 +46,11 @@ export default function Header() {
             <FlexDiv className="relative w-full justify-between">
                 <Link to="/">
                     <span className="text-lg font-bold">Carog</span>
+                    {/* <img
+                        src="/src/assets/logo-carog.jpg"
+                        alt="logo"
+                        className="size-7"
+                    /> */}
                 </Link>
                 <span className="text-xl font-bold absolute left-1/2 transform -translate-x-1/2">
                     {getTitle()}

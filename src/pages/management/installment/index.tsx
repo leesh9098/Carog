@@ -10,7 +10,7 @@ export default function Installment() {
     const { installmentList, isLoading } = useInstallmentList();
 
     return (
-        <FlexDiv className="flex-col gap-4 p-4">
+        <>
             <FlexDiv className="justify-center">
                 <AddButton to="/management/installment/add" />
             </FlexDiv>
@@ -42,6 +42,6 @@ export default function Installment() {
                     </FlexDiv>
                 </ItemCard>
             ))}
-        </FlexDiv>
+        </>
     )
 }
