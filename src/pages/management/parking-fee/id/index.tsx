@@ -3,15 +3,38 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Calendar } from "@/components/ui/calendar"
 import React, { useState } from "react";
 import { ChevronDown } from "lucide-react";
+import { ax, getCookie } from "@/lib/utils";
+
 
 export default function ParkingFeeId() {
     const [date, setDate] = React.useState<Date | undefined>(new Date());
     const [isOpenCalendar, setIsOpenCalendar] = useState(false);
+    const [price, setPrice] = useState("");
+    const [memo, setMemo] = useState("");
     const navigate = useNavigate();
+    const { id } = useParams();
+    const token = getCookie('token');
+
+    async function handleUpdate() {
+        try {
+            await ax.put(`/parking`, {
+                id,
+                price,
+                memo,
+                date,
+            }, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
+        } catch (error) {
+            console.error(error);
+        }
+    }
 
     const handleGoBack = () => {
         navigate(-1);
@@ -39,14 +62,14 @@ export default function ParkingFeeId() {
             </FlexDiv>
             <FlexDiv className="flex-col gap-2">
                 <Label htmlFor="price" className="text-sm font-semibold">금액</Label>
-                <Input id="price" placeholder="0원" />
+                <Input id="price" placeholder="0원" value={price} onChange={(e) => setPrice(e.target.value)} />
             </FlexDiv>
             <FlexDiv className="flex-col gap-2">
                 <Label htmlFor="memo" className="text-sm font-semibold">메모</Label>
-                <Textarea id="memo" className="bg-white" />
+                <Textarea id="memo" className="bg-white" value={memo} onChange={(e) => setMemo(e.target.value)} />
             </FlexDiv>
             <FlexDiv className="justify-end gap-2">
-                <Button variant="default"><Link to="/management/parking-fee">저장</Link></Button>
+                <Button variant="default" onClick={handleUpdate}>저장</Button>
                 <Button variant="outline" onClick={handleGoBack}>취소</Button>
             </FlexDiv>
         </FlexDiv>
