@@ -27,3 +27,28 @@ export function useMaintenanceHistoryList() {
         ...rest
     }
 }
+
+export function useMaintenanceHistoryListById(id?: number) {
+    const { data, ...rest } = useQuery({
+        queryKey: ['maintenanceHistoryListById', id],
+        queryFn: async () => {
+            const token = getCookie('token');
+            if (!token) return null;
+
+            const { data } = await ax.get(`/maintenance/list/${id}`, {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+
+            return v.parse(v.array(maintenanceHistoryListSchema), data.data.content);
+        },
+        enabled: !!id,
+        retry: false
+    })
+
+    return {
+        maintenanceHistoryListById: data ?? [],
+        ...rest
+    }
+}

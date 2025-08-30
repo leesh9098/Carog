@@ -30,3 +30,29 @@ export function useAccidentList() {
         ...rest
     }
 }
+
+export function useAccidentListById(id?: number) {
+    const { data, ...rest } = useQuery({
+        queryKey: ['accidentListById', id],
+        queryFn: async () => {
+            const token = getCookie('token');
+
+            if (!token) return null;
+
+            const { data } = await ax.get(`/accident/list/${id}`, {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+
+            return v.parse(v.array(accidentListSchema), data.data.content);
+        },
+        enabled: !!id,
+        retry: false
+    })
+
+    return {
+        accidentListById: data ?? [],
+        ...rest
+    }
+}

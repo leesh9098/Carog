@@ -27,3 +27,28 @@ export function useEtcList() {
         ...rest
     }
 }
+
+export function useEtcListById(id?: number) {
+    const { data, ...rest } = useQuery({
+        queryKey: ['etcListById', id],
+        queryFn: async () => {
+            const token = getCookie('token');
+            if (!token) return null;
+
+            const { data } = await ax.get(`/etc/list/${id}`, {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+
+            return v.parse(v.array(etcListSchema), data.data.content);
+        },
+        enabled: !!id,
+        retry: false
+    })
+
+    return {
+        etcListById: data ?? [],
+        ...rest
+    }
+}
