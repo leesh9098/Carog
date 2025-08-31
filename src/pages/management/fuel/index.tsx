@@ -5,7 +5,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { useFuelList } from "@/hooks/tanstackQuery/useFuelList";
 
 export default function Fuel() {
-    const { fuelList, isLoading } = useFuelList();
+    const { fuelList } = useFuelList();
 
     return (
         <>

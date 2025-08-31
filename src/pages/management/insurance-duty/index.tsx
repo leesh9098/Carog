@@ -2,13 +2,12 @@ import FlexDiv from "@/components/FlexDiv";
 import AddButton from "@/molecules/AddButton";
 import ItemCard from "@/components/ItemCard";
 import { Textarea } from "@/components/ui/textarea";
-import SelectCar from "@/components/SelectCar";
 import { useInsuranceDutyList } from "@/hooks/tanstackQuery/useInsuranceDutyList";
 
 export default function InsuranceDuty() {
     // 보험료/세금 페이지
 
-    const { insuranceDutyList, isLoading } = useInsuranceDutyList();
+    const { insuranceDutyList } = useInsuranceDutyList();
 
     return (
         <>

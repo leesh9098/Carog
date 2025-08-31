@@ -4,7 +4,7 @@ import { useCarList } from "@/hooks/tanstackQuery/useCarList";
 import AddButton from "@/molecules/AddButton";
 
 export default function Cars() {
-    const { cars, isLoading } = useCarList();
+    const { cars } = useCarList();
 
     return (
         <FlexDiv className="w-full flex-col p-4 gap-y-4">

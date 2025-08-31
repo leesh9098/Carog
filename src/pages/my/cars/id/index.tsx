@@ -19,7 +19,7 @@ export default function Car() {
     const { id } = useParams();
     const navigate = useNavigate();
 
-    const { cars, isLoading } = useCarList();
+    const { cars } = useCarList();
 
     const car = cars?.find((car) => car.id.toString() === id);
 

@@ -7,7 +7,7 @@ import { useInstallmentList } from "@/hooks/tanstackQuery/useInstallmentList";
 export default function Installment() {
     // 할부 페이지
 
-    const { installmentList, isLoading } = useInstallmentList();
+    const { installmentList } = useInstallmentList();
 
     return (
         <>

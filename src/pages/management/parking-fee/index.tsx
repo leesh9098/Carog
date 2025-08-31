@@ -5,7 +5,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { useParkingFeeList } from "@/hooks/tanstackQuery/useParkingFeeList";
 
 export default function ParkingFee() {
-    const { parkingFeeList, isLoading } = useParkingFeeList();
+    const { parkingFeeList } = useParkingFeeList();
 
     return (
         <>

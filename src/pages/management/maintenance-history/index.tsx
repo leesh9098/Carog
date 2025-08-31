@@ -5,7 +5,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { useMaintenanceHistoryList } from "@/hooks/tanstackQuery/useMaintenanceHistoryList";
 
 export default function MaintenanceHistory() {
-    const { maintenanceHistoryList, isLoading } = useMaintenanceHistoryList();
+    const { maintenanceHistoryList } = useMaintenanceHistoryList();
 
     return (
         <>

@@ -9,7 +9,7 @@ import { Link, useNavigate } from "react-router-dom";
 export default function My() {
     const navigate = useNavigate();
 
-    const { cars, isLoading } = useCarList();
+    const { cars } = useCarList();
 
     const {
         user,

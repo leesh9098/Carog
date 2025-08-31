@@ -2,13 +2,12 @@ import FlexDiv from "@/components/FlexDiv";
 import AddButton from "@/molecules/AddButton";
 import ItemCard from "@/components/ItemCard";
 import { Textarea } from "@/components/ui/textarea";
-import SelectCar from "@/components/SelectCar";
 import { useAccidentList } from "@/hooks/tanstackQuery/useAccidentList";
 
 export default function Accident() {
     // 사고 페이지
 
-    const { accidentList, isLoading } = useAccidentList();
+    const { accidentList } = useAccidentList();
 
     return (
         <>

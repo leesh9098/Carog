@@ -6,7 +6,7 @@ import { useEtcList } from "@/hooks/tanstackQuery/useEtcList";
 
 export default function Etc() {
     // 기타 페이지
-    const { etcList, isLoading } = useEtcList();
+    const { etcList } = useEtcList();
     
     return (
         <>
