@@ -30,3 +30,28 @@ export function useFuelList() {
         ...rest
     }
 }
+
+export function useFuelListById(id?: number) {
+    const { data, ...rest } = useQuery({
+        queryKey: ['fuelListById', id],
+        queryFn: async () => {
+            const token = getCookie('token');
+            if (!token) return null;
+
+            const { data } = await ax.get(`/oil/list/${id}`, {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+
+            return v.parse(v.array(fuelListSchema), data.data.content);
+        },
+        enabled: !!id,
+        retry: false
+    })
+
+    return {
+        fuelListById: data ?? [],
+        ...rest
+    }
+}

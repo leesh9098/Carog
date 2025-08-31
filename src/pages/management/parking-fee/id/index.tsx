@@ -5,10 +5,11 @@ import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { useNavigate, useParams } from "react-router-dom";
 import { Calendar } from "@/components/ui/calendar"
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { ChevronDown } from "lucide-react";
 import { ax, getCookie } from "@/lib/utils";
-
+import { useSelectedCar } from "@/contexts/SelectedCarContext";
+import { useParkingFeeListById } from "@/hooks/tanstackQuery/useParkingFeeList";
 
 export default function ParkingFeeId() {
     const [date, setDate] = React.useState<Date | undefined>(new Date());
@@ -17,8 +18,19 @@ export default function ParkingFeeId() {
     const [memo, setMemo] = useState("");
     const navigate = useNavigate();
     const { id } = useParams();
+    const { selectedCar } = useSelectedCar();
+    const { parkingFeeListById } = useParkingFeeListById(selectedCar?.id);
     const token = getCookie('token');
 
+    useEffect(() => {
+        if (parkingFeeListById.length > 0) {
+            const parkingFee = parkingFeeListById.find(parkingFee => parkingFee.id === Number(id));
+            if (!parkingFee) return;
+            setDate(parkingFee.date ? new Date(parkingFee.date) : undefined);
+            setPrice(parkingFee.price.toString());
+            setMemo(parkingFee.memo ?? "");
+        }
+    }, [parkingFeeListById]);
     async function handleUpdate() {
         try {
             await ax.put(`/parking`, {
@@ -44,10 +56,22 @@ export default function ParkingFeeId() {
         <FlexDiv className="flex-col gap-4 p-4">
             <FlexDiv className="justify-between items-center gap-2">
                 {date === undefined ?
-                <Label className="text-sm font-semibold">날짜 선택</Label>
-                : <Label className="text-sm font-semibold">{date?.toLocaleDateString()}</Label>
+                <Label 
+                    className="text-sm font-semibold"
+                >
+                    날짜 선택
+                </Label>
+                : 
+                <Label 
+                    className="text-sm font-semibold"
+                >
+                    {date?.toLocaleDateString()}
+                </Label>
                 }
-                <ChevronDown className="w-4 h-4" onClick={() =>  setIsOpenCalendar(!isOpenCalendar)} />
+                <ChevronDown 
+                    className="w-4 h-4" 
+                    onClick={() => setIsOpenCalendar(!isOpenCalendar)} 
+                />
             </FlexDiv>
             <FlexDiv className="relative w-full">
             {isOpenCalendar && (
@@ -61,12 +85,32 @@ export default function ParkingFeeId() {
             )}
             </FlexDiv>
             <FlexDiv className="flex-col gap-2">
-                <Label htmlFor="price" className="text-sm font-semibold">금액</Label>
-                <Input id="price" placeholder="0원" value={price} onChange={(e) => setPrice(e.target.value)} />
+                <Label 
+                    htmlFor="price" 
+                    className="text-sm font-semibold"
+                >
+                    금액(원)
+                </Label>
+                <Input 
+                    id="price" 
+                    placeholder="0원" 
+                    value={price} 
+                    onChange={(e) => setPrice(e.target.value)} 
+                />
             </FlexDiv>
             <FlexDiv className="flex-col gap-2">
-                <Label htmlFor="memo" className="text-sm font-semibold">메모</Label>
-                <Textarea id="memo" className="bg-white" value={memo} onChange={(e) => setMemo(e.target.value)} />
+                <Label 
+                    htmlFor="memo" 
+                    className="text-sm font-semibold"
+                >
+                    메모
+                </Label>
+                <Textarea 
+                    id="memo" 
+                    className="bg-white" 
+                    value={memo} 
+                    onChange={(e) => setMemo(e.target.value)} 
+                />
             </FlexDiv>
             <FlexDiv className="justify-end gap-2">
                 <Button variant="default" onClick={handleUpdate}>저장</Button>

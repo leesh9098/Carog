@@ -27,3 +27,27 @@ export function useParkingFeeList() {
         ...rest
     }
 }
+
+export function useParkingFeeListById(id?: number) {
+    const { data, ...rest } = useQuery({
+        queryKey: ['parkingFeeListById', id],
+        queryFn: async () => {
+            const token = getCookie('token');
+            if (!token) return null;
+
+            const { data } = await ax.get(`/parking/list/${id}`, {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+            return v.parse(v.array(parkingFeeListSchema), data.data.content);
+        },
+        enabled: !!id,
+        retry: false
+    })
+
+    return {
+        parkingFeeListById: data ?? [],
+        ...rest
+    }
+}

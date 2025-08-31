@@ -27,3 +27,26 @@ export function useInstallmentList() {
         ...rest
     }
 }
+
+export function useInstallmentListById(id?: number) {
+    const { data, ...rest } = useQuery({
+        queryKey: ['installmentListById', id],
+        queryFn: async () => {
+            const token = getCookie('token');
+            if (!token) return null;
+
+            const { data } = await ax.get(`/installment/list/${id}`, {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+            return v.parse(v.array(installmentListSchema), data.data.content);
+        },
+        enabled: !!id,
+        retry: false
+    })
+    return {
+        installmentListById: data ?? [],
+        ...rest
+    }
+}

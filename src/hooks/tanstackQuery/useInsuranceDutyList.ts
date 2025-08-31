@@ -30,3 +30,27 @@ export function useInsuranceDutyList() {
         ...rest
     }
 }
+
+export function useInsuranceDutyListById(id?: number) {
+    const { data, ...rest } = useQuery({
+        queryKey: ['insuranceDutyListById', id],
+        queryFn: async () => {
+            const token = getCookie('token');
+            if (!token) return null;
+
+            const { data } = await ax.get(`/insurance/list/${id}`, {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+            return v.parse(v.array(insuranceDutyListSchema), data.data.content);
+        },
+        enabled: !!id,
+        retry: false
+    })
+
+    return {
+        insuranceDutyListById: data ?? [],
+        ...rest
+    }
+}

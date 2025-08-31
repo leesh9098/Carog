@@ -23,6 +23,7 @@ export default function AccidentId() {
     const { id } = useParams();
     const navigate = useNavigate();
     const { accidentListById } = useAccidentListById(selectedCar?.id);
+    const token = getCookie('token');
 
     useEffect(() => {
         if (accidentListById.length > 0) {
@@ -34,8 +35,6 @@ export default function AccidentId() {
             setCompany(accident.company);
             setAdditionalPrice(accident.additionalPrice.toString());
             setMemo(accident.memo ?? "");
-            setCompany(accident.company);
-            setMemo(accident.memo ?? "");
         }
     }, [accidentListById]);
     const handleGoBack = () => {
@@ -43,8 +42,6 @@ export default function AccidentId() {
     };
 
     async function handleUpdate(){
-        const token = getCookie(`token`);
-        console.log(token);
         try {
             await ax.put(`/accident`, {
                 id: selectedCar?.id,
@@ -68,10 +65,22 @@ export default function AccidentId() {
         <FlexDiv className="flex-col gap-4 p-4">
            <FlexDiv className="justify-between items-center gap-2">
                 {date === undefined ?
-                <Label className="text-sm font-semibold">날짜 선택</Label>
-                : <Label className="text-sm font-semibold">{date?.toLocaleDateString()}</Label>
-                }
-                <ChevronDown className="w-4 h-4" onClick={() =>  setIsOpenCalendar(!isOpenCalendar)} />
+                    <Label 
+                        className="text-sm font-semibold"
+                    >
+                        날짜 선택
+                    </Label>
+                    : 
+                    <Label 
+                        className="text-sm font-semibold"
+                    >
+                        {date?.toLocaleDateString()}
+                    </Label>
+                    }
+                <ChevronDown 
+                    className="w-4 h-4" 
+                    onClick={() =>  setIsOpenCalendar(!isOpenCalendar)} 
+                />
             </FlexDiv>
             <FlexDiv className="relative w-full">
                 {isOpenCalendar && (

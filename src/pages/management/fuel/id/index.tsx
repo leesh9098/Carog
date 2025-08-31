@@ -3,16 +3,66 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Calendar } from "@/components/ui/calendar"
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { ChevronDown } from "lucide-react";
+import { useSelectedCar } from "@/contexts/SelectedCarContext";
+import { useFuelListById } from "@/hooks/tanstackQuery/useFuelList";
+import { ax, getCookie } from "@/lib/utils";
 
 export default function FuelId() {
     const [date, setDate] = React.useState<Date | undefined>(new Date());
     const [isOpenCalendar, setIsOpenCalendar] = useState(false);
+    const [type, setType] = useState("");
+    const [price, setPrice] = useState("");
+    const [liter, setLiter] = useState("");
+    const [unit, setUnit] = useState("");
+    const [company, setCompany] = useState("");
+    const [range, setRange] = useState("");
+    const [memo, setMemo] = useState("");
     const navigate = useNavigate();
+    const { id } = useParams();
+    const { selectedCar } = useSelectedCar();
+    const { fuelListById } = useFuelListById(selectedCar?.id);
+    const token = getCookie('token');
 
+    useEffect(() => {
+        if (fuelListById.length > 0) {
+            const fuel = fuelListById.find(fuel => fuel.id === Number(id));
+            if (!fuel) return;
+            setDate(fuel.date ? new Date(fuel.date) : undefined);
+            setType(fuel.type);
+            setPrice(fuel.price.toString());
+            setLiter(fuel.liter);
+            setUnit(fuel.unit.toString());
+            setCompany(fuel.company);
+            setRange(fuel.range.toString());
+            setMemo(fuel.memo ?? "");
+        }
+    }, [fuelListById]);
+
+    async function handleUpdate() {
+        try {
+            await ax.put(`/oil`, {
+                id,
+                type,
+                price,
+                liter,
+                unit,
+                company,
+                range,
+                memo,
+                date,
+            }, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
+        } catch (error) {
+            console.error(error);
+        }
+    }
     const handleGoBack = () => {
         navigate(-1);
     };
@@ -22,10 +72,20 @@ export default function FuelId() {
             <FlexDiv className="flex-col gap-2">
             <FlexDiv className="justify-between items-center gap-2">
                 {date === undefined ?
-                <Label className="text-sm font-semibold">날짜 선택</Label>
-                : <Label className="text-sm font-semibold">{date?.toLocaleDateString()}</Label>
+                <Label 
+                    className="text-sm font-semibold"
+                >
+                    날짜 선택
+                </Label>
+                : <Label 
+                    className="text-sm font-semibold"
+                >
+                    {date?.toLocaleDateString()}
+                </Label>
                 }
-                <ChevronDown className="w-4 h-4" onClick={() =>  setIsOpenCalendar(!isOpenCalendar)} />
+                <ChevronDown 
+                    className="w-4 h-4" onClick={() =>  setIsOpenCalendar(!isOpenCalendar)} 
+                />
             </FlexDiv>
             <FlexDiv className="relative w-full">
             {isOpenCalendar && (
@@ -38,35 +98,105 @@ export default function FuelId() {
                 />
             )}
             </FlexDiv>
-                <Label htmlFor="type" className="text-sm font-semibold">유종</Label>
-                <Input id="type" placeholder="휘발유/경유/LPG" />
+                <Label 
+                    htmlFor="type"
+                    className="text-sm font-semibold"
+                >
+                    유종
+                </Label>
+                <Input 
+                    id="type" 
+                    placeholder="휘발유/경유/LPG"
+                    value={type} 
+                    onChange={(e) => setType(e.target.value)} 
+                />
             </FlexDiv>
             <FlexDiv className="flex-col gap-2">
-                <Label htmlFor="price" className="text-sm font-semibold">금액(원)</Label>
-                <Input id="price" placeholder="0" />
+                <Label 
+                    htmlFor="price" 
+                    className="text-sm font-semibold"
+                >   
+                    금액(원)
+                </Label>
+                <Input 
+                    id="price" 
+                    placeholder="0" 
+                    value={price} 
+                    onChange={(e) => setPrice(e.target.value)} 
+                />
             </FlexDiv>
             <FlexDiv className="flex-col gap-2">
-                <Label htmlFor="liter" className="text-sm font-semibold">리터수(L)</Label>
-                <Input id="liter" placeholder="0" />
+                <Label 
+                    htmlFor="liter" 
+                    className="text-sm font-semibold"
+                >
+                    리터수(L)
+                </Label>
+                <Input 
+                    id="liter" 
+                    placeholder="0" 
+                    value={liter} 
+                    onChange={(e) => setLiter(e.target.value)} 
+                />
             </FlexDiv>
             <FlexDiv className="flex-col gap-2">
-                <Label htmlFor="unit" className="text-sm font-semibold">단가(원)</Label>
-                <Input id="unit" placeholder="0" />
+                <Label 
+                    htmlFor="unit" 
+                    className="text-sm font-semibold"
+                >
+                    단가(원)
+                </Label>
+                <Input 
+                    id="unit" 
+                    placeholder="0" 
+                    value={unit} 
+                    onChange={(e) => setUnit(e.target.value)} 
+                />
             </FlexDiv>
             <FlexDiv className="flex-col gap-2">
-                <Label htmlFor="company" className="text-sm font-semibold">업체명</Label>
-                <Input id="company" placeholder="업체명을 입력해주세요" />
+                <Label 
+                    htmlFor="company" 
+                    className="text-sm font-semibold"
+                >
+                    업체명
+                </Label>
+                <Input 
+                    id="company" 
+                    placeholder="업체명을 입력해주세요" 
+                    value={company} 
+                    onChange={(e) => setCompany(e.target.value)} 
+                />
             </FlexDiv>
             <FlexDiv className="flex-col gap-2">
-                <Label htmlFor="kilometer" className="text-sm font-semibold">키로수(km)</Label>
-                <Input id="kilometer" placeholder="0" />
+                <Label 
+                    htmlFor="kilometer" 
+                    className="text-sm font-semibold"
+                >
+                    키로수(km)
+                </Label>
+                <Input 
+                    id="kilometer" 
+                    placeholder="0" 
+                    value={range} 
+                    onChange={(e) => setRange(e.target.value)} 
+                />
             </FlexDiv>
             <FlexDiv className="flex-col gap-2">
-                <Label htmlFor="memo" className="text-sm font-semibold">메모</Label>
-                <Textarea id="memo" className="bg-white" />
+                <Label 
+                    htmlFor="memo" 
+                    className="text-sm font-semibold"
+                >
+                    메모
+                </Label>
+                <Textarea 
+                    id="memo" 
+                    className="bg-white" 
+                    value={memo} 
+                    onChange={(e) => setMemo(e.target.value)} 
+                />
             </FlexDiv>
             <FlexDiv className="justify-end gap-2">
-                <Button variant="default"><Link to="/management/fuel">저장</Link></Button>
+                <Button variant="default" onClick={handleUpdate}>저장</Button>
                 <Button variant="outline" onClick={handleGoBack}>취소</Button>
             </FlexDiv>
         </FlexDiv>

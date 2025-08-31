@@ -66,10 +66,22 @@ export default function MaintenanceHistoryId() {
         <FlexDiv className="flex-col gap-4 p-4">
             <FlexDiv className="justify-between items-center gap-2">
                 {date === undefined ?
-                    <Label className="text-sm font-semibold">날짜 선택</Label>
-                    : <Label className="text-sm font-semibold">{date?.toLocaleDateString()}</Label>
+                    <Label 
+                        className="text-sm font-semibold"
+                    >
+                        날짜 선택
+                    </Label>
+                    : 
+                    <Label 
+                        className="text-sm font-semibold"
+                    >
+                        {date?.toLocaleDateString()}
+                    </Label>
                 }
-                <ChevronDown className="w-4 h-4" onClick={() => setIsOpenCalendar(!isOpenCalendar)} />
+                <ChevronDown 
+                    className="w-4 h-4" 
+                    onClick={() => setIsOpenCalendar(!isOpenCalendar)} 
+                />
             </FlexDiv>
             <FlexDiv className="relative w-full">
                 {isOpenCalendar && (
