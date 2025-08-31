@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 
 interface SelectedCarContextType {
     selectedCar: {
@@ -27,6 +27,13 @@ export const SelectedCarProvider = ({ children }: { children: React.ReactNode })
         number: string;
         represent: boolean;
     } | null>(null);
+
+    useEffect(() => {
+        const selectedCar = window.sessionStorage.getItem('selectedCar');
+        if (selectedCar) {
+            setSelectedCar(JSON.parse(selectedCar));
+        }
+    }, []);
 
     return (
         <SelectedCarContext.Provider value={{

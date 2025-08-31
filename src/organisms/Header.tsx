@@ -45,12 +45,12 @@ export default function Header() {
         <header className="fixed top-0 left-1/2 transform -translate-x-1/2 w-full max-w-120 h-14 flex items-center shadow-md px-4 bg-white">
             <FlexDiv className="relative w-full justify-between">
                 <Link to="/">
-                    <span className="text-lg font-bold">Carog</span>
-                    {/* <img
-                        src="/src/assets/logo-carog.jpg"
+                    {/* <span className="text-lg font-bold">Carog</span> */}
+                    <img
+                        src="/src/assets/logo.png"
                         alt="logo"
-                        className="size-7"
-                    /> */}
+                        className="w-auto h-8"
+                    />
                 </Link>
                 <span className="text-xl font-bold absolute left-1/2 transform -translate-x-1/2">
                     {getTitle()}

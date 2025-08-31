@@ -13,6 +13,7 @@ export default function ManagementLayout() {
     useEffect(() => {
         if (cars && cars.length > 0) {
             const defaultCar = cars.find(car => car.represent) || cars[0];
+            window.sessionStorage.setItem('selectedCar', JSON.stringify(defaultCar));
             setSelectedCar(defaultCar);
         }
     }, [cars]);
@@ -20,6 +21,7 @@ export default function ManagementLayout() {
     const handleCarChange = (id: string) => {
         if (!cars) return;
         const car = cars.find((car) => car.id.toString() === id);
+        window.sessionStorage.setItem('selectedCar', JSON.stringify(car!));
         setSelectedCar(car!);
     };
 
