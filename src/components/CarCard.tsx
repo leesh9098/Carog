@@ -46,7 +46,17 @@ export default function CarCard({
     };
 
     const handleDeleteCar = async () => {
-
+        try {
+            const token = getCookie('token');
+            await ax.delete(`/car/${id}`, {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+            queryClient.invalidateQueries({ queryKey: ['carList'] });
+        } catch (error) {
+            console.error(error);
+        }
     };
 
     return (
