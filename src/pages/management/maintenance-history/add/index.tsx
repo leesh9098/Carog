@@ -4,25 +4,11 @@ import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { useNavigate } from "react-router-dom";
-// import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
-// import { useForm } from "react-hook-form";
 import { ax, getCookie } from "@/lib/utils";
 import { Calendar } from "@/components/ui/calendar"
 import React, { useState } from "react";
 import { ChevronDown } from "lucide-react";
 import { useSelectedCar } from "@/contexts/SelectedCarContext";
-// import { z } from "zod";
-// import { zodResolver } from "@hookform/resolvers/zod";
-
-// interface Maintenance {
-//     carInfoId: number;
-//     item: string;
-//     price: string;
-//     mileage: string;
-//     company: string;
-//     memo: string;
-//     date: Date;
-// }
 
 export default function MaintenanceHistoryAdd() {
     const [date, setDate] = React.useState<Date | undefined>(new Date());
@@ -39,33 +25,8 @@ export default function MaintenanceHistoryAdd() {
         navigate(-1);
     };
 
-    // const formSchema = z.object({
-    //     carInfoId: z.number(),
-    //     item: z.string().min(1),
-    //     price: z.string().min(1),
-    //     mileage: z.string().min(1),
-    //     company: z.string().min(1),
-    //     memo: z.string(),
-    //     date: z.date(),
-    // });
-
-    // const form = useForm<Maintenance>({
-    //     defaultValues: {
-    //         carInfoId: selectedCar?.id,
-    //         item: "",
-    //         price: "",
-    //         mileage: "",
-    //         company: "",
-    //         memo: "",
-    //         date: date,
-    //     },
-    //     resolver: zodResolver(formSchema),
-    // });
-
-
-    async function handleAdd(){
+    const handleAdd = async () => {
         const token = getCookie(`token`);
-        console.log(token);
         try {
             await ax.post(`/maintenance`, {
                 carInfoId: selectedCar?.id,
@@ -80,10 +41,10 @@ export default function MaintenanceHistoryAdd() {
                     Authorization: `Bearer ${token}`,
                 },
             });
+            navigate("/management/maintenance-history", { replace: true });
         } catch (error) {
             console.error(error);
         }
-       // window.location.reload();
     }
 
     return (

@@ -12,6 +12,9 @@ export function useEtcList() {
             if (!token) return null;
 
             const { data } = await ax.get('/etc/list', {
+                params: {
+                    sort: "createdAt,desc"
+                },
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }

@@ -22,9 +22,8 @@ export default function ParkingFeeAdd() {
         navigate(-1);
     };
 
-    async function handleAdd(){
+    const handleAdd = async () => {
         const token = getCookie(`token`);
-        console.log(token);
         try {
             await ax.post(`/parking`, {
                 carInfoId: selectedCar?.id,
@@ -36,6 +35,7 @@ export default function ParkingFeeAdd() {
                     Authorization: `Bearer ${token}`,
                 },
             });
+            navigate("/management/parking-fee", { replace: true });
         } catch (error) {
             console.error(error);
         }

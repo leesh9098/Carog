@@ -26,9 +26,8 @@ export default function FuelAdd() {
         navigate(-1);
     };
 
-    async function handleAdd(){
+    const handleAdd = async () => {
         const token = getCookie(`token`);
-        console.log(token);
         try {
             await ax.post(`/fuel`, {
                 carInfoId: selectedCar?.id,
@@ -45,6 +44,7 @@ export default function FuelAdd() {
                     Authorization: `Bearer ${token}`,
                 },
             });
+            navigate("/management/fuel", { replace: true });
         } catch (error) {
             console.error(error);
         }

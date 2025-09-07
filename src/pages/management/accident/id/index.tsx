@@ -56,6 +56,7 @@ export default function AccidentId() {
                     Authorization: `Bearer ${token}`,
                 },
             });
+            navigate("/management/accident", { replace: true });
         } catch (error) {
             console.error(error);
         }

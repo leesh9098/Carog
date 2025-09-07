@@ -12,6 +12,9 @@ export function useInstallmentList() {
             if (!token) return null;
 
             const { data } = await ax.get('/installment/list', {
+                params: {
+                    sort: "createdAt,desc"
+                },
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }

@@ -54,6 +54,7 @@ export default function InsuranceDutyId() {
                     Authorization: `Bearer ${token}`,
                 },
             });
+            navigate("/management/insurance-duty", { replace: true });
         } catch (error) {
             console.error(error);
         }

@@ -12,6 +12,9 @@ export function useParkingFeeList() {
             if (!token) return null;
 
             const { data } = await ax.get('/parking/list', {
+                params: {
+                    sort: "createdAt,desc"
+                },
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }

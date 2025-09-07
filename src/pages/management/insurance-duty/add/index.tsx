@@ -24,9 +24,8 @@ export default function InsuranceDutyAdd() {
         navigate(-1);
     };
 
-    async function handleAdd(){
+    const handleAdd = async () => {
         const token = getCookie("token");
-        console.log(token);
         try {
             await ax.post(`/insurance`, {
                 carInfoId: selectedCar?.id,
@@ -40,6 +39,7 @@ export default function InsuranceDutyAdd() {
                     Authorization: `Bearer ${token}`,
                 },
             });
+            navigate("/management/insurance-duty", { replace: true });
         } catch (error) {
             console.error(error);
         }

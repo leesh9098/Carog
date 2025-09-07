@@ -59,6 +59,7 @@ export default function FuelId() {
                     Authorization: `Bearer ${token}`,
                 },
             });
+            navigate("/management/fuel", { replace: true });
         } catch (error) {
             console.error(error);
         }

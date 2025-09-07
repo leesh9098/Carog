@@ -23,7 +23,7 @@ export function useMaintenanceHistoryList() {
     })
 
     return {
-        maintenanceHistoryList: data,
+        maintenanceHistoryList: data ? data.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()) : [],
         ...rest
     }
 }

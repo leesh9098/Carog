@@ -23,9 +23,8 @@ export default function EtcAdd() {
         navigate(-1);
     };
 
-    async function handleAdd(){
+    const handleAdd = async () => {
         const token = getCookie(`token`);
-        console.log(token);
         try {
             await ax.post(`/etc`, {
                 carInfoId: selectedCar?.id,
@@ -38,6 +37,7 @@ export default function EtcAdd() {
                     Authorization: `Bearer ${token}`,
                 },
             });
+            navigate("/management/etc", { replace: true });
         } catch (error) {
             console.error(error);
         }

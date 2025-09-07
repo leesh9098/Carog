@@ -12,6 +12,9 @@ export function useFuelList() {
             if (!token) return null;
 
             const { data } = await ax.get('/oil/list', {
+                params: {
+                    sort: "createdAt,desc"
+                },
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }

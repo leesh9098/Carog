@@ -31,6 +31,7 @@ export default function ParkingFeeId() {
             setMemo(parkingFee.memo ?? "");
         }
     }, [parkingFeeListById]);
+
     async function handleUpdate() {
         try {
             await ax.put(`/parking`, {
@@ -43,6 +44,7 @@ export default function ParkingFeeId() {
                     Authorization: `Bearer ${token}`,
                 },
             });
+            navigate("/management/parking-fee", { replace: true });
         } catch (error) {
             console.error(error);
         }

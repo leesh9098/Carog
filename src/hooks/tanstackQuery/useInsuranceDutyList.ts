@@ -12,6 +12,9 @@ export function useInsuranceDutyList() {
             if (!token) return null;
 
             const { data } = await ax.get('/insurance/list', {
+                params: {
+                    sort: "createdAt,desc"
+                },
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }

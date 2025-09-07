@@ -12,6 +12,9 @@ export function useAccidentList() {
             if (!token) return null;
 
             const { data } = await ax.get('/accident/list', {
+                params: {
+                    sort: "createdAt,desc"
+                },
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }

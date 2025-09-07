@@ -25,9 +25,8 @@ export default function InstallmentAdd() {
         navigate(-1);
     };
 
-    async function handleAdd(){
+    const handleAdd = async () => {
         const token = getCookie(`token`);
-        console.log(token);
         try {
             await ax.post(`/installment`, {
                 carInfoId: selectedCar?.id,
@@ -41,6 +40,7 @@ export default function InstallmentAdd() {
                     Authorization: `Bearer ${token}`,
                 },
             });
+            navigate("/management/installment", { replace: true });
         } catch (error) {
             console.error(error);
         }

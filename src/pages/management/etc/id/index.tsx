@@ -51,6 +51,7 @@ export default function EtcId() {
                     Authorization: `Bearer ${token}`,
                 },
             });
+            navigate("/management/etc", { replace: true });
         } catch (error) {
             console.error(error);
         }

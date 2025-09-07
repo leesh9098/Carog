@@ -15,7 +15,9 @@ export const maintenanceHistoryListSchema = v.object({
     mileage: v.number(),
     company: v.string(),
     memo: v.nullable(v.string()),
-    date: v.string()
+    date: v.string(),
+    createdAt: v.string(),
+    updatedAt: v.string()
 });
 
 export const fuelListSchema = v.object({
@@ -28,7 +30,9 @@ export const fuelListSchema = v.object({
     company: v.string(),
     range: v.number(),
     memo: v.nullable(v.string()),
-    date: v.string()
+    date: v.string(),
+    createdAt: v.string(),
+    updatedAt: v.string()
 });
 
 export const insuranceDutyListSchema = v.object({
@@ -38,7 +42,9 @@ export const insuranceDutyListSchema = v.object({
     price: v.number(),
     company: v.string(),
     memo: v.nullable(v.string()),
-    date: v.string()
+    date: v.string(),
+    createdAt: v.string(),
+    updatedAt: v.string()
 });
 
 export const accidentListSchema = v.object({
@@ -49,7 +55,9 @@ export const accidentListSchema = v.object({
     company: v.string(),
     additionalPrice: v.number(),
     memo: v.nullable(v.string()),
-    date: v.string()
+    date: v.string(),
+    createdAt: v.string(),
+    updatedAt: v.string()
 });
 
 export const installmentListSchema = v.object({
@@ -59,7 +67,9 @@ export const installmentListSchema = v.object({
     monthly: v.number(),
     round: v.number(),
     memo: v.nullable(v.string()),
-    date: v.string()
+    date: v.string(),
+    createdAt: v.string(),
+    updatedAt: v.string()
 });
 
 export const parkingFeeListSchema = v.object({
@@ -67,7 +77,9 @@ export const parkingFeeListSchema = v.object({
     carInfoId: v.number(),
     price: v.number(),
     memo: v.nullable(v.string()),
-    date: v.string()
+    date: v.string(),
+    createdAt: v.string(),
+    updatedAt: v.string()
 });
 
 export const etcListSchema = v.object({
@@ -76,7 +88,9 @@ export const etcListSchema = v.object({
     item: v.string(),
     price: v.number(),
     memo: v.nullable(v.string()),
-    date: v.string()
+    date: v.string(),
+    createdAt: v.string(),
+    updatedAt: v.string()
 });
 
 export type CarList = v.InferOutput<typeof carListSchema>;

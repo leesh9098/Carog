@@ -23,7 +23,7 @@ export default function CarAdd() {
                     "Authorization": `Bearer ${token}`
                 }
             });
-            navigate("/my/cars");
+            navigate("/my/cars", { replace: true });
         } catch (error) {
             console.error(error);
         }

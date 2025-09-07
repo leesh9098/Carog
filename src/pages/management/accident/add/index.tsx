@@ -25,9 +25,8 @@ export default function AccidentAdd() {
         navigate(-1);
     };
 
-    async function handleAdd(){
+    const handleAdd = async () => {
         const token = getCookie(`token`);
-        console.log(token);
         try {
             await ax.post(`/accident`, {
                 carInfoId: selectedCar?.id,
@@ -42,6 +41,7 @@ export default function AccidentAdd() {
                     Authorization: `Bearer ${token}`,
                 },
             });
+            navigate("/management/accident", { replace: true });
         } catch (error) {
             console.error(error);
         }

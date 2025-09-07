@@ -53,6 +53,7 @@ export default function MaintenanceHistoryId() {
                     Authorization: `Bearer ${token}`,
                 },
             });
+            navigate("/management/maintenance-history", { replace: true });
         } catch (error) {
             console.error(error);
         }

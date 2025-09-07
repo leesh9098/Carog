@@ -12,6 +12,9 @@ export function useCarList() {
             if (!token) return null;
 
             const { data } = await ax.get('/car/list', {
+                params: {
+                    sort: "createdAt,desc"
+                },
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }

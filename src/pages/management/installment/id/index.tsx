@@ -49,11 +49,12 @@ export default function InstallmentId() {
                 round,
                 memo,
                 date,
-        }, {
-            headers: {
-                Authorization: `Bearer ${token}`,
-            },
-        });
+            }, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
+            navigate("/management/installment", { replace: true });
         } catch (error) {
             console.error(error);
         }
