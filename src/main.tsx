@@ -36,6 +36,7 @@ import ManagementLayout from './pages/management/layout'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { SelectedCarProvider } from './contexts/SelectedCarContext'
 import CarAdd from './pages/my/cars/add'
+import { Analytics } from '@vercel/analytics/react'
 
 const queryClient = new QueryClient();
 
@@ -49,6 +50,7 @@ createRoot(document.getElementById('root')!).render(
               <Header />
               <Sidebar />
               <div className='w-full mt-14'>
+                <Analytics />
                 <Routes>
                   <Route path="/" element={<Home />} />
                   <Route path="/login" element={<Login />} />
