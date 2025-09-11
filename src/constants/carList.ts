@@ -8,7 +8,7 @@ export const carListSchema = v.object({
 });
 
 export const maintenanceHistoryListSchema = v.object({
-    memo: v.nullable(v.string()),
+    memo: v.optional(v.string()),
     date: v.string(),
     createdAt: v.string(),
     updatedAt: v.string(),
@@ -29,7 +29,7 @@ export const fuelListSchema = v.object({
     unit: v.number(),
     company: v.string(),
     range: v.number(),
-    memo: v.nullable(v.string()),
+    memo: v.optional(v.string()),
     date: v.string(),
     createdAt: v.string(),
     updatedAt: v.string()
@@ -41,7 +41,7 @@ export const insuranceDutyListSchema = v.object({
     type: v.string(),
     price: v.number(),
     company: v.string(),
-    memo: v.nullable(v.string()),
+    memo: v.optional(v.string()),
     date: v.string(),
     createdAt: v.string(),
     updatedAt: v.string()
@@ -54,7 +54,7 @@ export const accidentListSchema = v.object({
     price: v.number(),
     company: v.string(),
     additionalPrice: v.number(),
-    memo: v.nullable(v.string()),
+    memo: v.optional(v.string()),
     date: v.string(),
     createdAt: v.string(),
     updatedAt: v.string()
@@ -66,7 +66,7 @@ export const installmentListSchema = v.object({
     price: v.number(),
     monthly: v.number(),
     round: v.number(),
-    memo: v.nullable(v.string()),
+    memo: v.optional(v.string()),
     date: v.string(),
     createdAt: v.string(),
     updatedAt: v.string()
@@ -76,7 +76,7 @@ export const parkingFeeListSchema = v.object({
     id: v.number(),
     carInfoId: v.number(),
     price: v.number(),
-    memo: v.nullable(v.string()),
+    memo: v.optional(v.string()),
     date: v.string(),
     createdAt: v.string(),
     updatedAt: v.string()
@@ -87,7 +87,7 @@ export const etcListSchema = v.object({
     carInfoId: v.number(),
     item: v.string(),
     price: v.number(),
-    memo: v.nullable(v.string()),
+    memo: v.optional(v.string()),
     date: v.string(),
     createdAt: v.string(),
     updatedAt: v.string()

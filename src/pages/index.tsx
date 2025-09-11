@@ -1,4 +1,7 @@
 import FlexDiv from "@/components/FlexDiv";
+import { Button } from "@/components/ui/button";
+import { useSession } from "@/contexts/SessionContext";
+import { useCarList } from "@/hooks/tanstackQuery/useCarList";
 import { Link } from "react-router-dom";
 
 interface Button {
@@ -79,14 +82,32 @@ function ButtonList({
 }
 
 export default function Home() {
+    const { isLoggedIn } = useSession();
+    const { cars, isLoading } = useCarList();
+
     return (
-        <FlexDiv className="flex-wrap gap-y-4 p-4">
-            {buttons.map((button) => (
-                <ButtonList
-                    key={button.id}
-                    button={button}
-                />
-            ))}
-        </FlexDiv>
+        <div>
+            {isLoggedIn && !isLoading && cars?.length === 0 && (
+                <div className="p-4">
+                    <FlexDiv className="flex-col gap-y-4 p-4 border border-gray-300 rounded-md shadow-md">
+                        <div>
+                            <h6 className="text-lg font-bold">등록된 차량이 없습니다</h6>
+                            <p className="text-sm font-semibold text-gray-400">차량을 등록하여 사용해보세요</p>
+                        </div>
+                        <Link to="/my/cars/add" className="self-end">
+                            <Button className="font-semibold">차량 등록</Button>
+                        </Link>
+                    </FlexDiv>
+                </div>
+            )}
+            <FlexDiv className="flex-wrap gap-y-4 p-4">
+                {buttons.map((button) => (
+                    <ButtonList
+                        key={button.id}
+                        button={button}
+                    />
+                ))}
+            </FlexDiv>
+        </div>
     );
 }
