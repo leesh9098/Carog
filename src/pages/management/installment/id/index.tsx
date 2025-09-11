@@ -9,7 +9,7 @@ import React, { useState, useEffect } from "react";
 import { ChevronDown } from "lucide-react";
 import { ax, getCookie } from "@/lib/utils";
 import { useSelectedCar } from "@/contexts/SelectedCarContext";
-import { useInstallmentListById } from "@/hooks/tanstackQuery/useInstallmentList";
+import { useInstallmentList } from "@/hooks/tanstackQuery/useInstallmentList";
 
 export default function InstallmentId() {
     const [date, setDate] = React.useState<Date | undefined>(new Date());
@@ -21,12 +21,12 @@ export default function InstallmentId() {
     const navigate = useNavigate();
     const { id } = useParams();
     const { selectedCar } = useSelectedCar();
-    const { installmentListById } = useInstallmentListById(selectedCar?.id);
+    const { installmentList } = useInstallmentList(selectedCar?.id);
     const token = getCookie('token');
 
     useEffect(() => {
-        if (installmentListById.length > 0) {
-            const installment = installmentListById.find(installment => installment.id === Number(id));
+        if (installmentList.length > 0) {
+            const installment = installmentList.find(installment => installment.id === Number(id));
             if (!installment) return;
             setDate(installment.date ? new Date(installment.date) : undefined);
             setPrice(installment.price.toString());
@@ -34,7 +34,7 @@ export default function InstallmentId() {
             setRound(installment.round.toString());
             setMemo(installment.memo ?? "");
         }
-    }, [installmentListById]);
+    }, [installmentList]);
 
     const handleGoBack = () => {
         navigate(-1);

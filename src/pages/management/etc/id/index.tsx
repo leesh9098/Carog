@@ -7,7 +7,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { Calendar } from "@/components/ui/calendar"
 import React, { useState, useEffect } from "react";
 import { ChevronDown } from "lucide-react";
-import { useEtcListById } from "@/hooks/tanstackQuery/useEtcList";
+import { useEtcList } from "@/hooks/tanstackQuery/useEtcList";
 import { useSelectedCar } from "@/contexts/SelectedCarContext";
 import { ax, getCookie } from "@/lib/utils";
 
@@ -20,19 +20,19 @@ export default function EtcId() {
     const [memo, setMemo] = useState("");
     const { id } = useParams();
     const { selectedCar } = useSelectedCar();
-    const { etcListById } = useEtcListById(selectedCar?.id);
+    const { etcList } = useEtcList(selectedCar?.id);
     const token = getCookie('token');
 
     useEffect(() => {
-        if (etcListById.length > 0) {
-            const etc = etcListById.find(etc => etc.id === Number(id));
+        if (etcList.length > 0) {
+            const etc = etcList.find(etc => etc.id === Number(id));
             if (!etc) return;
             setDate(etc.date ? new Date(etc.date) : undefined);
             setItem(etc.item);
             setPrice(etc.price.toString());
             setMemo(etc.memo ?? "");
         }
-    }, [etcListById]);
+    }, [etcList]);
 
     const handleGoBack = () => {
         navigate(-1);

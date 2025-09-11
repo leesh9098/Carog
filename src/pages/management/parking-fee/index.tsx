@@ -3,9 +3,11 @@ import AddButton from "@/molecules/AddButton";
 import ItemCard from "@/components/ItemCard";
 import { Textarea } from "@/components/ui/textarea";
 import { useParkingFeeList } from "@/hooks/tanstackQuery/useParkingFeeList";
+import { useSelectedCar } from "@/contexts/SelectedCarContext";
 
 export default function ParkingFee() {
-    const { parkingFeeList } = useParkingFeeList();
+    const { selectedCar } = useSelectedCar();
+    const { parkingFeeList } = useParkingFeeList(selectedCar?.id);
 
     return (
         <>

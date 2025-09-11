@@ -9,7 +9,7 @@ import React, { useEffect, useState } from "react";
 import { ChevronDown } from "lucide-react";
 import { ax, getCookie } from "@/lib/utils";
 import { useSelectedCar } from "@/contexts/SelectedCarContext";
-import { useMaintenanceHistoryListById } from "@/hooks/tanstackQuery/useMaintenanceHistoryList";
+import { useMaintenanceHistoryList } from "@/hooks/tanstackQuery/useMaintenanceHistoryList";
 
 export default function MaintenanceHistoryId() {
     const [date, setDate] = React.useState<Date | undefined>(new Date());
@@ -22,11 +22,11 @@ export default function MaintenanceHistoryId() {
     const navigate = useNavigate();
     const { selectedCar } = useSelectedCar();
     const { id } = useParams();
-    const { maintenanceHistoryListById } = useMaintenanceHistoryListById(selectedCar?.id);
+    const { maintenanceHistoryList } = useMaintenanceHistoryList(selectedCar?.id);
 
     useEffect(() => {
-        if (maintenanceHistoryListById.length > 0) {
-            const maintenanceHistory = maintenanceHistoryListById.find(maintenanceHistory => maintenanceHistory.id === Number(id));
+        if (maintenanceHistoryList.length > 0) {
+            const maintenanceHistory = maintenanceHistoryList.find(maintenanceHistory => maintenanceHistory.id === Number(id));
             if (!maintenanceHistory) return;
             setDate(maintenanceHistory.date ? new Date(maintenanceHistory.date) : undefined);
             setItem(maintenanceHistory.item);
@@ -35,7 +35,7 @@ export default function MaintenanceHistoryId() {
             setCompany(maintenanceHistory.company);
             setMemo(maintenanceHistory.memo ?? "");
         }
-    }, [maintenanceHistoryListById]);
+    }, [maintenanceHistoryList]);
 
     async function handleUpdate() {
         const token = getCookie(`token`);

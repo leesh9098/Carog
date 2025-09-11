@@ -3,11 +3,11 @@ import AddButton from "@/molecules/AddButton";
 import ItemCard from "@/components/ItemCard";
 import { Textarea } from "@/components/ui/textarea";
 import { useAccidentList } from "@/hooks/tanstackQuery/useAccidentList";
+import { useSelectedCar } from "@/contexts/SelectedCarContext";
 
 export default function Accident() {
-    // 사고 페이지
-
-    const { accidentList } = useAccidentList();
+    const { selectedCar } = useSelectedCar();
+    const { accidentList } = useAccidentList(selectedCar?.id);
 
     return (
         <>

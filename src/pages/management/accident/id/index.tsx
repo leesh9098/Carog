@@ -9,7 +9,7 @@ import React, { useState, useEffect } from "react";
 import { ChevronDown } from "lucide-react";
 import { ax, getCookie } from "@/lib/utils";
 import { useSelectedCar } from "@/contexts/SelectedCarContext";
-import { useAccidentListById } from "@/hooks/tanstackQuery/useAccidentList";
+import { useAccidentList } from "@/hooks/tanstackQuery/useAccidentList";
 
 export default function AccidentId() {
     const [date, setDate] = React.useState<Date | undefined>(new Date());
@@ -22,12 +22,12 @@ export default function AccidentId() {
     const { selectedCar } = useSelectedCar();
     const { id } = useParams();
     const navigate = useNavigate();
-    const { accidentListById } = useAccidentListById(selectedCar?.id);
+    const { accidentList } = useAccidentList(selectedCar?.id);
     const token = getCookie('token');
 
     useEffect(() => {
-        if (accidentListById.length > 0) {
-            const accident = accidentListById.find(accident => accident.id === Number(id));
+        if (accidentList.length > 0) {
+            const accident = accidentList.find(accident => accident.id === Number(id));
             if (!accident) return;
             setDate(accident.date ? new Date(accident.date) : undefined);
             setType(accident.type);
@@ -36,7 +36,7 @@ export default function AccidentId() {
             setAdditionalPrice(accident.additionalPrice.toString());
             setMemo(accident.memo ?? "");
         }
-    }, [accidentListById]);
+    }, [accidentList]);
     const handleGoBack = () => {
         navigate(-1);
     };

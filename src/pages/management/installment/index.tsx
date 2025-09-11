@@ -3,11 +3,11 @@ import AddButton from "@/molecules/AddButton";
 import ItemCard from "@/components/ItemCard";
 import { Textarea } from "@/components/ui/textarea";
 import { useInstallmentList } from "@/hooks/tanstackQuery/useInstallmentList";
+import { useSelectedCar } from "@/contexts/SelectedCarContext";
 
 export default function Installment() {
-    // 할부 페이지
-
-    const { installmentList } = useInstallmentList();
+    const { selectedCar } = useSelectedCar();
+    const { installmentList } = useInstallmentList(selectedCar?.id);
 
     return (
         <>

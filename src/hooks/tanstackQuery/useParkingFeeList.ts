@@ -3,15 +3,15 @@ import { ax, getCookie } from "@/lib/utils";
 import { useQuery } from "@tanstack/react-query";
 import * as v from 'valibot';
 
-export function useParkingFeeList() {
+export function useParkingFeeList(carInfoId?: number) {
     const { data, ...rest } = useQuery({
-        queryKey: ['parkingFeeList'],
+        queryKey: ['parkingFeeList', carInfoId],
         queryFn: async () => {
             const token = getCookie('token');
 
             if (!token) return null;
 
-            const { data } = await ax.get('/parking/list', {
+            const { data } = await ax.get(`/parking/list/${carInfoId}`, {
                 params: {
                     sort: "createdAt,desc"
                 },
@@ -22,35 +22,12 @@ export function useParkingFeeList() {
 
             return v.parse(v.array(parkingFeeListSchema), data.data.content);
         },
-        retry: false
+        retry: false,
+        enabled: !!carInfoId
     })
 
     return {
-        parkingFeeList: data,
-        ...rest
-    }
-}
-
-export function useParkingFeeListById(id?: number) {
-    const { data, ...rest } = useQuery({
-        queryKey: ['parkingFeeListById', id],
-        queryFn: async () => {
-            const token = getCookie('token');
-            if (!token) return null;
-
-            const { data } = await ax.get(`/parking/list/${id}`, {
-                headers: {
-                    'Authorization': `Bearer ${token}`
-                }
-            });
-            return v.parse(v.array(parkingFeeListSchema), data.data.content);
-        },
-        enabled: !!id,
-        retry: false
-    })
-
-    return {
-        parkingFeeListById: data ?? [],
+        parkingFeeList: data ? data : [],
         ...rest
     }
 }

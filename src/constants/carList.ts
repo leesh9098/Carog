@@ -8,16 +8,16 @@ export const carListSchema = v.object({
 });
 
 export const maintenanceHistoryListSchema = v.object({
+    memo: v.nullable(v.string()),
+    date: v.string(),
+    createdAt: v.string(),
+    updatedAt: v.string(),
     id: v.number(),
     carInfoId: v.number(),
     item: v.string(),
     price: v.number(),
     mileage: v.number(),
-    company: v.string(),
-    memo: v.nullable(v.string()),
-    date: v.string(),
-    createdAt: v.string(),
-    updatedAt: v.string()
+    company: v.string()
 });
 
 export const fuelListSchema = v.object({

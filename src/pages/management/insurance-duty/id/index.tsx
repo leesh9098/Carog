@@ -8,7 +8,7 @@ import { Calendar } from "@/components/ui/calendar"
 import React, { useState, useEffect } from "react";
 import { ChevronDown } from "lucide-react";
 import { useSelectedCar } from "@/contexts/SelectedCarContext";
-import { useInsuranceDutyListById } from "@/hooks/tanstackQuery/useInsuranceDutyList";
+import { useInsuranceDutyList } from "@/hooks/tanstackQuery/useInsuranceDutyList";
 import { ax, getCookie } from "@/lib/utils";
 
 export default function InsuranceDutyId() {
@@ -21,12 +21,12 @@ export default function InsuranceDutyId() {
     const navigate = useNavigate();
     const { id } = useParams();
     const { selectedCar } = useSelectedCar();
-    const { insuranceDutyListById } = useInsuranceDutyListById(selectedCar?.id);
+    const { insuranceDutyList } = useInsuranceDutyList(selectedCar?.id);
     const token = getCookie('token');
 
     useEffect(() => {
-        if (insuranceDutyListById.length > 0) {
-            const insuranceDuty = insuranceDutyListById.find(insuranceDuty => insuranceDuty.id === Number(id));
+        if (insuranceDutyList.length > 0) {
+            const insuranceDuty = insuranceDutyList.find(insuranceDuty => insuranceDuty.id === Number(id));
             if (!insuranceDuty) return;
             setDate(insuranceDuty.date ? new Date(insuranceDuty.date) : undefined);
             setType(insuranceDuty.type);
@@ -34,7 +34,7 @@ export default function InsuranceDutyId() {
             setCompany(insuranceDuty.company);
             setMemo(insuranceDuty.memo ?? "");
         }
-    }, [insuranceDutyListById]);
+    }, [insuranceDutyList]);
 
     const handleGoBack = () => {
         navigate(-1);

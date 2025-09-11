@@ -3,9 +3,11 @@ import AddButton from "@/molecules/AddButton";
 import ItemCard from "@/components/ItemCard";
 import { Textarea } from "@/components/ui/textarea";
 import { useFuelList } from "@/hooks/tanstackQuery/useFuelList";
+import { useSelectedCar } from "@/contexts/SelectedCarContext";
 
 export default function Fuel() {
-    const { fuelList } = useFuelList();
+    const { selectedCar } = useSelectedCar();
+    const { fuelList } = useFuelList(selectedCar?.id);
 
     return (
         <>

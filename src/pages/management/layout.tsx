@@ -11,7 +11,7 @@ export default function ManagementLayout() {
     const { selectedCar, setSelectedCar } = useSelectedCar();
 
     useEffect(() => {
-        if (cars && cars.length > 0) {
+        if (cars && cars.length > 0 && !selectedCar) {
             const defaultCar = cars.find(car => car.represent) || cars[0];
             window.sessionStorage.setItem('selectedCar', JSON.stringify(defaultCar));
             setSelectedCar(defaultCar);

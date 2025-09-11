@@ -3,10 +3,11 @@ import AddButton from "@/molecules/AddButton";
 import ItemCard from "@/components/ItemCard";
 import { Textarea } from "@/components/ui/textarea";
 import { useEtcList } from "@/hooks/tanstackQuery/useEtcList";
+import { useSelectedCar } from "@/contexts/SelectedCarContext";
 
 export default function Etc() {
-    // 기타 페이지
-    const { etcList } = useEtcList();
+    const { selectedCar } = useSelectedCar();
+    const { etcList } = useEtcList(selectedCar?.id);
     
     return (
         <>

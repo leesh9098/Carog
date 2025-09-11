@@ -3,15 +3,15 @@ import { ax, getCookie } from "@/lib/utils";
 import { useQuery } from "@tanstack/react-query";
 import * as v from 'valibot';
 
-export function useInstallmentList() {
+export function useInstallmentList(carInfoId?: number) {
     const { data, ...rest } = useQuery({
-        queryKey: ['installmentList'],
+        queryKey: ['installmentList', carInfoId],
         queryFn: async () => {
             const token = getCookie('token');
 
             if (!token) return null;
 
-            const { data } = await ax.get('/installment/list', {
+            const { data } = await ax.get(`/installment/list/${carInfoId}`, {
                 params: {
                     sort: "createdAt,desc"
                 },
@@ -22,34 +22,12 @@ export function useInstallmentList() {
 
             return v.parse(v.array(installmentListSchema), data.data.content);
         },
-        retry: false
+        retry: false,
+        enabled: !!carInfoId
     })
 
     return {
-        installmentList: data,
-        ...rest
-    }
-}
-
-export function useInstallmentListById(id?: number) {
-    const { data, ...rest } = useQuery({
-        queryKey: ['installmentListById', id],
-        queryFn: async () => {
-            const token = getCookie('token');
-            if (!token) return null;
-
-            const { data } = await ax.get(`/installment/list/${id}`, {
-                headers: {
-                    'Authorization': `Bearer ${token}`
-                }
-            });
-            return v.parse(v.array(installmentListSchema), data.data.content);
-        },
-        enabled: !!id,
-        retry: false
-    })
-    return {
-        installmentListById: data ?? [],
+        installmentList: data ? data : [],
         ...rest
     }
 }

@@ -3,9 +3,11 @@ import ItemCard from "@/components/ItemCard";
 import AddButton from "@/molecules/AddButton";
 import { Textarea } from "@/components/ui/textarea";
 import { useMaintenanceHistoryList } from "@/hooks/tanstackQuery/useMaintenanceHistoryList";
+import { useSelectedCar } from "@/contexts/SelectedCarContext";
 
 export default function MaintenanceHistory() {
-    const { maintenanceHistoryList } = useMaintenanceHistoryList();
+    const { selectedCar } = useSelectedCar();
+    const { maintenanceHistoryList } = useMaintenanceHistoryList(selectedCar?.id);
 
     return (
         <>

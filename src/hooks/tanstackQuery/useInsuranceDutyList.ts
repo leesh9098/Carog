@@ -3,15 +3,15 @@ import { ax, getCookie, getInsuranceDutyType } from "@/lib/utils";
 import { useQuery } from "@tanstack/react-query";
 import * as v from 'valibot';
 
-export function useInsuranceDutyList() {
+export function useInsuranceDutyList(carInfoId?: number) {
     const { data, ...rest } = useQuery({
-        queryKey: ['insuranceDutyList'],
+        queryKey: ['insuranceDutyList', carInfoId],
         queryFn: async () => {
             const token = getCookie('token');
 
             if (!token) return null;
 
-            const { data } = await ax.get('/insurance/list', {
+            const { data } = await ax.get(`/insurance/list/${carInfoId}`, {
                 params: {
                     sort: "createdAt,desc"
                 },
@@ -22,38 +22,15 @@ export function useInsuranceDutyList() {
 
             return v.parse(v.array(insuranceDutyListSchema), data.data.content);
         },
-        retry: false
+        retry: false,
+        enabled: !!carInfoId
     })
 
     return {
-        insuranceDutyList: data?.map(insuranceDuty => ({
+        insuranceDutyList: data ? data.map(insuranceDuty => ({
             ...insuranceDuty,
             type: getInsuranceDutyType(insuranceDuty.type)
-        })),
-        ...rest
-    }
-}
-
-export function useInsuranceDutyListById(id?: number) {
-    const { data, ...rest } = useQuery({
-        queryKey: ['insuranceDutyListById', id],
-        queryFn: async () => {
-            const token = getCookie('token');
-            if (!token) return null;
-
-            const { data } = await ax.get(`/insurance/list/${id}`, {
-                headers: {
-                    'Authorization': `Bearer ${token}`
-                }
-            });
-            return v.parse(v.array(insuranceDutyListSchema), data.data.content);
-        },
-        enabled: !!id,
-        retry: false
-    })
-
-    return {
-        insuranceDutyListById: data ?? [],
+        })) : [],
         ...rest
     }
 }

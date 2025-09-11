@@ -8,7 +8,7 @@ import { Calendar } from "@/components/ui/calendar"
 import React, { useState, useEffect } from "react";
 import { ChevronDown } from "lucide-react";
 import { useSelectedCar } from "@/contexts/SelectedCarContext";
-import { useFuelListById } from "@/hooks/tanstackQuery/useFuelList";
+import { useFuelList } from "@/hooks/tanstackQuery/useFuelList";
 import { ax, getCookie } from "@/lib/utils";
 
 export default function FuelId() {
@@ -24,12 +24,12 @@ export default function FuelId() {
     const navigate = useNavigate();
     const { id } = useParams();
     const { selectedCar } = useSelectedCar();
-    const { fuelListById } = useFuelListById(selectedCar?.id);
+    const { fuelList } = useFuelList(selectedCar?.id);
     const token = getCookie('token');
 
     useEffect(() => {
-        if (fuelListById.length > 0) {
-            const fuel = fuelListById.find(fuel => fuel.id === Number(id));
+        if (fuelList && fuelList.length > 0) {
+            const fuel = fuelList.find(fuel => fuel.id === Number(id));
             if (!fuel) return;
             setDate(fuel.date ? new Date(fuel.date) : undefined);
             setType(fuel.type);
@@ -40,7 +40,7 @@ export default function FuelId() {
             setRange(fuel.range.toString());
             setMemo(fuel.memo ?? "");
         }
-    }, [fuelListById]);
+    }, [fuelList]);
 
     async function handleUpdate() {
         try {

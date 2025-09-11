@@ -3,15 +3,15 @@ import { ax, getCookie } from "@/lib/utils";
 import { useQuery } from "@tanstack/react-query";
 import * as v from 'valibot';
 
-export function useMaintenanceHistoryList() {
+export function useMaintenanceHistoryList(carInfoId?: number) {
     const { data, ...rest } = useQuery({
-        queryKey: ['maintenanceHistoryList'],
+        queryKey: ['maintenanceHistoryList', carInfoId],
         queryFn: async () => {
             const token = getCookie('token');
 
             if (!token) return null;
 
-            const { data } = await ax.get('/maintenance/list', {
+            const { data } = await ax.get(`/maintenance/list/${carInfoId}`, {
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }
@@ -19,36 +19,12 @@ export function useMaintenanceHistoryList() {
 
             return v.parse(v.array(maintenanceHistoryListSchema), data.data.content);
         },
-        retry: false
+        retry: false,
+        enabled: !!carInfoId
     })
 
     return {
         maintenanceHistoryList: data ? data.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()) : [],
-        ...rest
-    }
-}
-
-export function useMaintenanceHistoryListById(id?: number) {
-    const { data, ...rest } = useQuery({
-        queryKey: ['maintenanceHistoryListById', id],
-        queryFn: async () => {
-            const token = getCookie('token');
-            if (!token) return null;
-
-            const { data } = await ax.get(`/maintenance/list/${id}`, {
-                headers: {
-                    'Authorization': `Bearer ${token}`
-                }
-            });
-
-            return v.parse(v.array(maintenanceHistoryListSchema), data.data.content);
-        },
-        enabled: !!id,
-        retry: false
-    })
-
-    return {
-        maintenanceHistoryListById: data ?? [],
         ...rest
     }
 }

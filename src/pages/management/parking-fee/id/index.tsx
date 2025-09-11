@@ -9,7 +9,7 @@ import React, { useState, useEffect } from "react";
 import { ChevronDown } from "lucide-react";
 import { ax, getCookie } from "@/lib/utils";
 import { useSelectedCar } from "@/contexts/SelectedCarContext";
-import { useParkingFeeListById } from "@/hooks/tanstackQuery/useParkingFeeList";
+import { useParkingFeeList } from "@/hooks/tanstackQuery/useParkingFeeList";
 
 export default function ParkingFeeId() {
     const [date, setDate] = React.useState<Date | undefined>(new Date());
@@ -19,18 +19,18 @@ export default function ParkingFeeId() {
     const navigate = useNavigate();
     const { id } = useParams();
     const { selectedCar } = useSelectedCar();
-    const { parkingFeeListById } = useParkingFeeListById(selectedCar?.id);
+    const { parkingFeeList } = useParkingFeeList(selectedCar?.id);
     const token = getCookie('token');
 
     useEffect(() => {
-        if (parkingFeeListById.length > 0) {
-            const parkingFee = parkingFeeListById.find(parkingFee => parkingFee.id === Number(id));
+        if (parkingFeeList.length > 0) {
+            const parkingFee = parkingFeeList.find(parkingFee => parkingFee.id === Number(id));
             if (!parkingFee) return;
             setDate(parkingFee.date ? new Date(parkingFee.date) : undefined);
             setPrice(parkingFee.price.toString());
             setMemo(parkingFee.memo ?? "");
         }
-    }, [parkingFeeListById]);
+    }, [parkingFeeList]);
 
     async function handleUpdate() {
         try {

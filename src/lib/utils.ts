@@ -33,6 +33,10 @@ export function getFuelType(type: string) {
       return "LPG";
     case "premium gasoline":
       return "고급 휘발유";
+    case "electric":
+      return "전기";
+    default:
+      return ""
   }
 }
 
@@ -42,6 +46,8 @@ export function getInsuranceDutyType(type: string) {
       return "보험료";
     case "duty":
       return "세금";
+    default:
+      return ""
   }
 }
 
@@ -51,5 +57,7 @@ export function getAccidentType(type: string) {
       return "가해";
     case "damage":
       return "피해";
+    default:
+      return ""
   }
 }
