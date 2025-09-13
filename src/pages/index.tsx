@@ -16,43 +16,43 @@ const buttons: Button[] = [
         id: 1,
         name: '정비내역',
         path: '/management/maintenance-history',
-        image: '/src/assets/mechanic.png'
+        image: '/icons/mechanic.png'
     },
     {
         id: 2,
         name: '유류비',
         path: '/management/fuel',
-        image: '/src/assets/gas-pump.png'
+        image: '/icons/gas-pump.png'
     },
     {
         id: 3,
         name: '보험료/세금',
         path: '/management/insurance-duty',
-        image: '/src/assets/fees.png'
+        image: '/icons/fees.png'
     },
     {
         id: 4,
         name: '사고',
         path: '/management/accident',
-        image: '/src/assets/fender-bender.png'
+        image: '/icons/fender-bender.png'
     },
     {
         id: 5,
         name: '할부',
         path: '/management/installment',
-        image: '/src/assets/credit.png'
+        image: '/icons/credit.png'
     },
     {
         id: 6,        
         name: '주차비',
         path: '/management/parking-fee',
-        image: '/src/assets/parking.png'
+        image: '/icons/parking.png'
     },
     {
         id: 7,
         name: '기타',
         path: '/management/etc',
-        image: '/src/assets/more.png'
+        image: '/icons/more.png'
     }
 ];
 
