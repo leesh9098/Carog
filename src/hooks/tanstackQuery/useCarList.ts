@@ -20,6 +20,8 @@ export function useCarList() {
                 }
             });
 
+            if (!data.data) return [];
+
             return v.parse(v.array(carListSchema), data.data);
         },
         retry: false
