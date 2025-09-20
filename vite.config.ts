@@ -21,7 +21,7 @@ export default defineConfig(({ mode }) => {
       port: 3003,
       proxy: {
         "/api": {
-          target: env.VITE_API_URL,
+          target: env.VITE_API_URL || "https://carog-api.seoeungi.work",
           changeOrigin: true,
           rewrite: (path) => path.replace(/^\/api/, '')
         }
