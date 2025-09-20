@@ -1,4 +1,5 @@
 {
+    "$schema": "https://carog.vercel.app/vercel.json",
     "rewrites": [
         {
             "source": "/(.*)",
