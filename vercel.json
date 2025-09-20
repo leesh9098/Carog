@@ -2,12 +2,12 @@
     "$schema": "https://carog.vercel.app/vercel.json",
     "rewrites": [
         {
-            "source": "/(.*)",
-            "destination": "/"
-        },
-        {
             "source": "/api/(.*)",
             "destination": "https://carog-api.seoeungi.work/api/$1"
+        },
+        {
+            "source": "/(.*)",
+            "destination": "/"
         }
     ]
 }
