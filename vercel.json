@@ -7,7 +7,7 @@
         },
         {
             "source": "/api/(.*)",
-            "destination": "https://carog-api.seoeungi.work/api/:path*"
+            "destination": "https://carog-api.seoeungi.work/api/(.*)"
         }
     ]
 }
