@@ -4,10 +4,6 @@
         {
             "source": "/(.*)",
             "destination": "/"
-        },
-        {
-            "source": "/api/(.*)",
-            "destination": "https://carog-api.seoeungi.work/api/:path*"
         }
     ]
 }
