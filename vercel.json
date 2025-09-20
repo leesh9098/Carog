@@ -3,7 +3,7 @@
     "rewrites": [
         {
             "source": "/api/(.*)",
-            "destination": "https://carog-api.seoeungi.work/api/(.*)"
+            "destination": "https://carog-api.seoeungi.work/(.*)"
         },
         {
             "source": "/(.*)",
