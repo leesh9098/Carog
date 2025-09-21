@@ -29,7 +29,7 @@ export default function FuelAdd() {
     const handleAdd = async () => {
         const token = getCookie(`token`);
         try {
-            await ax.post(`/fuel`, {
+            await ax.post(`/oil`, {
                 carInfoId: selectedCar?.id,
                 type,
                 price,

@@ -23,6 +23,7 @@ export default function CarCard({
     represent: boolean;
 }) {
     const [isOpen, setIsOpen] = useState<boolean>(false);
+    const [deleteIsOpen, setDeleteIsOpen] = useState<boolean>(false);
 
     const queryClient = useQueryClient();
 
@@ -45,6 +46,10 @@ export default function CarCard({
         }
     };
 
+    const handleDeleteDialog = async () => {
+        setDeleteIsOpen(true);
+    };
+
     const handleDeleteCar = async () => {
         try {
             const token = getCookie('token');
@@ -54,6 +59,8 @@ export default function CarCard({
                 }
             });
             queryClient.invalidateQueries({ queryKey: ['carList'] });
+            window.sessionStorage.removeItem('selectedCar');
+            setDeleteIsOpen(false);
         } catch (error) {
             console.error(error);
         }
@@ -85,7 +92,7 @@ export default function CarCard({
                                 ·
                                 <span
                                     className="cursor-pointer"
-                                    onClick={handleDeleteCar}
+                                    onClick={handleDeleteDialog}
                                 >
                                     삭제
                                 </span>
@@ -121,6 +128,30 @@ export default function CarCard({
                         <Button
                             variant="default"
                             onClick={handleRepresent}
+                        >
+                            확인
+                        </Button>
+                    </DialogFooter>
+                </DialogContent>
+            </Dialog>
+            <Dialog open={deleteIsOpen} onOpenChange={setDeleteIsOpen}>
+                <DialogContent>
+                    <DialogHeader>
+                        <DialogTitle>차량 삭제</DialogTitle>
+                    </DialogHeader>
+                    <DialogDescription>
+                        차량을 삭제하시겠습니까?
+                    </DialogDescription>
+                    <DialogFooter>
+                        <Button
+                            variant="outline"
+                            onClick={() => setDeleteIsOpen(false)}
+                        >
+                            취소
+                        </Button>
+                        <Button
+                            variant="default"
+                            onClick={handleDeleteCar}
                         >
                             확인
                         </Button>

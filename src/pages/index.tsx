@@ -2,6 +2,8 @@ import FlexDiv from "@/components/FlexDiv";
 import { Button } from "@/components/ui/button";
 import { useSession } from "@/contexts/SessionContext";
 import { useCarList } from "@/hooks/tanstackQuery/useCarList";
+import { getCookie } from "@/lib/utils";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 interface Button {
@@ -61,9 +63,26 @@ function ButtonList({
 }: {
     button: Button;
 }) {
+    const [loading, setLoading] = useState<boolean>(false);
+    const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
+
+    useEffect(() => {
+        const token = getCookie('token');
+        if (token) {
+            setIsLoggedIn(true);
+        } else {
+            setIsLoggedIn(false);
+        }
+        setLoading(false);
+    }, []);
+
+    if (loading) {
+        return null;
+    }
+
     return (
         <Link
-            to={button.path}
+            to={isLoggedIn ? button.path : '/login'}
             key={button.id}
             className="flex w-1/4"
         >

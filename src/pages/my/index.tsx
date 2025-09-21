@@ -59,7 +59,7 @@ export default function My() {
                         to="/my/cars"
                         className="font-semibold text-gray-400"
                     >
-                        목록보기
+                        관리
                     </Link>
                 </FlexDiv>
                 <FlexDiv className="flex-col gap-y-4">

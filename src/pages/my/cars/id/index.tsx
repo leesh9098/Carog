@@ -28,17 +28,25 @@ export default function Car() {
     };
 
     const handleSave = async () => {
-        if (cars?.length === 1) {
-            setIsOpen(true);
-            return;
-        }
         try {
             const token = getCookie("token");
-            await ax.put(`/car/represent/${id}`, null, {
-                headers: {
-                    'Authorization': `Bearer ${token}`
+            if (isRepresent) {
+                await ax.put(`/car/represent/${id}`, null, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+            } else {
+                if (cars?.length === 1) {
+                    setIsOpen(true);
+                    return;
                 }
-            });
+                await ax.put(`/car/unrepresent/${id}`, null, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+            }
             await ax.put("car", {
                 id,
                 name,
@@ -70,19 +78,22 @@ export default function Car() {
             <FlexDiv className="flex-col gap-4 p-4">
                 <FlexDiv className="items-center gap-2">
                     <Checkbox
+                        id="represent"
                         checked={isRepresent}
                         onCheckedChange={handleRepresent}
                         className="size-[22px]"
                     />
                     {isRepresent ? (
-                        <Badge className="text-xs font-semibold px-[6px]">대표</Badge>
+                        <Label htmlFor="represent">
+                            <Badge className="text-xs font-semibold px-[6px]">대표</Badge>
+                        </Label>
                     ) : (
-                        <Button 
-                            variant="ghost"
-                            className="justify-start text-sm text-gray-400 font-semibold p-0 h-fit hover:bg-transparent"
+                        <Label
+                            htmlFor="represent"
+                            className="text-sm text-gray-400 font-semibold p-0 h-fit"
                         >
                             대표 차량으로 설정
-                        </Button>
+                        </Label>
                     )}
                 </FlexDiv>
                 <FlexDiv className="flex-col gap-2">
