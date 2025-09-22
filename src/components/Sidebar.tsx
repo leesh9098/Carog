@@ -38,17 +38,25 @@ export default function Sidebar() {
     };
 
     const handleLogout = async () => {
-        const token = getCookie('token');
-        await ax.post('/auth/logout/kakao', null, {
-            headers: {
-                'Authorization': `Bearer ${token}`
+        try {
+            const token = getCookie('token');
+            await ax.post('/auth/logout/kakao', null, {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+            document.cookie = `token=; path=/; max-age=0;`;
+            setIsLoggedIn(false);
+            setUser(null);
+            setOpenMobile(false);
+            navigate('/');
+        } catch (error: any) {
+            console.error(error);
+            if (error.response.data.code === "EA0006") {
+                alert("로그인 정보가 만료되었습니다. 다시 로그인해주세요.");
+                navigate("/login");
             }
-        });
-        document.cookie = `token=; path=/; max-age=0;`;
-        setIsLoggedIn(false);
-        setUser(null);
-        setOpenMobile(false);
-        navigate('/');
+        }
     };
 
     useEffect(() => {

@@ -104,6 +104,13 @@ export default function Home() {
     const { isLoggedIn } = useSession();
     const { cars, isLoading } = useCarList();
 
+    // TODO: 에러처리
+    // EA0011 -> 사용자 조회 시 데이터 미존재 오류
+    // EU0006 -> 로그인한 유저에 대한 정보 조회 실패
+
+    // @ts-ignore
+    // console.log("error message", error?.response.data)
+
     return (
         <div>
             {isLoggedIn && !isLoading && cars?.length === 0 && (

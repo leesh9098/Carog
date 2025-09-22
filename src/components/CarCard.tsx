@@ -1,6 +1,6 @@
 import { Card, CardHeader, CardTitle, CardAction, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import LicensePlate from "@/components/LicensePlate";
 import FlexDiv from "@/components/FlexDiv";
 import { Button } from "@/components/ui/button";
@@ -25,6 +25,8 @@ export default function CarCard({
     const [isOpen, setIsOpen] = useState<boolean>(false);
     const [deleteIsOpen, setDeleteIsOpen] = useState<boolean>(false);
 
+    const navigate = useNavigate();
+
     const queryClient = useQueryClient();
 
     const handleRepresentDialog = async () => {
@@ -41,8 +43,12 @@ export default function CarCard({
             });
             setIsOpen(false);
             queryClient.invalidateQueries({ queryKey: ['carList'] });
-        } catch (error) {
+        } catch (error: any) {
             console.error(error);
+            if (error.response.data.code === "EA0006") {
+                alert("로그인 정보가 만료되었습니다. 다시 로그인해주세요.");
+                navigate("/login");
+            }
         }
     };
 
@@ -61,8 +67,12 @@ export default function CarCard({
             queryClient.invalidateQueries({ queryKey: ['carList'] });
             window.sessionStorage.removeItem('selectedCar');
             setDeleteIsOpen(false);
-        } catch (error) {
+        } catch (error: any) {
             console.error(error);
+            if (error.response.data.code === "EA0006") {
+                alert("로그인 정보가 만료되었습니다. 다시 로그인해주세요.");
+                navigate("/login");
+            }
         }
     };
 

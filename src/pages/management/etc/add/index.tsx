@@ -38,8 +38,12 @@ export default function EtcAdd() {
                 },
             });
             navigate("/management/etc", { replace: true });
-        } catch (error) {
+        } catch (error: any) {
             console.error(error);
+            if (error.response.data.code === "EA0006") {
+                alert("로그인 정보가 만료되었습니다. 다시 로그인해주세요.");
+                navigate("/login");
+            }
         }
     }
 

@@ -30,8 +30,11 @@ export default function My() {
             setIsLoggedIn(false);
             setUser(null);
             navigate('/');
-        } catch (error) {
+        } catch (error: any) {
             console.error(error);
+            if (error.response.data.code === "EA0006") {
+                navigate("/");
+            }
         }
     };
     

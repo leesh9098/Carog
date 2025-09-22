@@ -1,9 +1,12 @@
 import { fuelListSchema } from "@/constants/carList";
 import { ax, getCookie, getFuelType } from "@/lib/utils";
 import { useQuery } from "@tanstack/react-query";
+import { useNavigate } from "react-router-dom";
 import * as v from 'valibot';
 
 export function useFuelList(carInfoId?: number) {
+    const navigate = useNavigate();
+    
     const { data, ...rest } = useQuery({
         queryKey: ['fuelList', carInfoId],
         queryFn: async () => {
@@ -11,16 +14,24 @@ export function useFuelList(carInfoId?: number) {
 
             if (!token) return null;
 
-            const { data } = await ax.get(`/oil/list/${carInfoId}`, {
-                params: {
-                    sort: "createdAt,desc"
-                },
-                headers: {
-                    'Authorization': `Bearer ${token}`
-                }
-            });
+            try {
+                const { data } = await ax.get(`/oil/list/${carInfoId}`, {
+                    params: {
+                        sort: "createdAt,desc"
+                    },
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
 
-            return v.parse(v.array(fuelListSchema), data.data.content);
+                return v.parse(v.array(fuelListSchema), data.data.content);
+            } catch (error: any) {
+                console.error(error);
+                if (error.response.data.code === "EA0006") {
+                    alert("로그인 정보가 만료되었습니다. 다시 로그인해주세요.");
+                    navigate("/login");
+                }
+            }
         },
         retry: false,
         enabled: !!carInfoId

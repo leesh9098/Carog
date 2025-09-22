@@ -41,7 +41,7 @@ export default function AccidentId() {
         navigate(-1);
     };
 
-    async function handleUpdate(){
+    async function handleUpdate() {
         try {
             await ax.put(`/accident`, {
                 id: selectedCar?.id,
@@ -57,30 +57,34 @@ export default function AccidentId() {
                 },
             });
             navigate("/management/accident", { replace: true });
-        } catch (error) {
+        } catch (error: any) {
             console.error(error);
+            if (error.response.data.code === "EA0006") {
+                alert("로그인 정보가 만료되었습니다. 다시 로그인해주세요.");
+                navigate("/login");
+            }
         }
     }
 
     return (
         <FlexDiv className="flex-col gap-4 p-4">
-           <FlexDiv className="justify-between items-center gap-2">
+            <FlexDiv className="justify-between items-center gap-2">
                 {date === undefined ?
-                    <Label 
+                    <Label
                         className="text-sm font-semibold"
                     >
                         날짜 선택
                     </Label>
-                    : 
-                    <Label 
+                    :
+                    <Label
                         className="text-sm font-semibold"
                     >
                         {date?.toLocaleDateString()}
                     </Label>
-                    }
-                <ChevronDown 
-                    className="w-4 h-4" 
-                    onClick={() =>  setIsOpenCalendar(!isOpenCalendar)} 
+                }
+                <ChevronDown
+                    className="w-4 h-4"
+                    onClick={() => setIsOpenCalendar(!isOpenCalendar)}
                 />
             </FlexDiv>
             <FlexDiv className="relative w-full">
@@ -93,75 +97,75 @@ export default function AccidentId() {
                         captionLayout="dropdown"
                     />
                 )}
-            </FlexDiv>            
+            </FlexDiv>
             <FlexDiv className="flex-col gap-2">
-                <Label 
-                    htmlFor="type" 
+                <Label
+                    htmlFor="type"
                     className="text-sm font-semibold"
                 >
                     종류
                 </Label>
-                <Input 
-                    id="type" 
-                    value={type} 
-                    onChange={(e) => setType(e.target.value)} 
-                    placeholder="종류를 입력해주세요" 
+                <Input
+                    id="type"
+                    value={type}
+                    onChange={(e) => setType(e.target.value)}
+                    placeholder="종류를 입력해주세요"
                 />
             </FlexDiv>
             <FlexDiv className="flex-col gap-2">
-                <Label 
-                    htmlFor="price" 
+                <Label
+                    htmlFor="price"
                     className="text-sm font-semibold"
                 >
                     금액(원)
                 </Label>
-                <Input 
-                    id="price" 
-                    value={price} 
-                    onChange={(e) => setPrice(e.target.value)} 
-                    placeholder="0" 
+                <Input
+                    id="price"
+                    value={price}
+                    onChange={(e) => setPrice(e.target.value)}
+                    placeholder="0"
                 />
             </FlexDiv>
             <FlexDiv className="flex-col gap-2">
-                <Label 
-                    htmlFor="insurance" 
+                <Label
+                    htmlFor="insurance"
                     className="text-sm font-semibold"
                 >
                     보험사
                 </Label>
-                <Input 
-                    id="insurance" 
-                    value={company} 
-                    onChange={(e) => setCompany(e.target.value)} 
-                    placeholder="보험사를 입력해주세요" 
+                <Input
+                    id="insurance"
+                    value={company}
+                    onChange={(e) => setCompany(e.target.value)}
+                    placeholder="보험사를 입력해주세요"
                 />
             </FlexDiv>
             <FlexDiv className="flex-col gap-2">
-                <Label 
-                    htmlFor="etc" 
+                <Label
+                    htmlFor="etc"
                     className="text-sm font-semibold"
                 >
                     기타금액(원)
                 </Label>
-                <Input 
-                    id="etc" 
-                    value={additionalPrice} 
-                    onChange={(e) => setAdditionalPrice(e.target.value)} 
-                    placeholder="0" 
+                <Input
+                    id="etc"
+                    value={additionalPrice}
+                    onChange={(e) => setAdditionalPrice(e.target.value)}
+                    placeholder="0"
                 />
             </FlexDiv>
             <FlexDiv className="flex-col gap-2">
-                <Label 
-                    htmlFor="memo" 
+                <Label
+                    htmlFor="memo"
                     className="text-sm font-semibold"
                 >
                     메모
                 </Label>
-                <Textarea 
-                    id="memo" 
-                    value={memo} 
-                    onChange={(e) => setMemo(e.target.value)} 
-                    className="bg-white" 
+                <Textarea
+                    id="memo"
+                    value={memo}
+                    onChange={(e) => setMemo(e.target.value)}
+                    className="bg-white"
                 />
             </FlexDiv>
             <FlexDiv className="justify-end gap-2">

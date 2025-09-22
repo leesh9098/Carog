@@ -8,7 +8,7 @@ export function useCarList() {
         queryKey: ['carList'],
         queryFn: async () => {
             const token = getCookie('token');
-
+            
             if (!token) return null;
 
             const { data } = await ax.get('/car/list', {
@@ -20,15 +20,13 @@ export function useCarList() {
                 }
             });
 
-            if (!data.data) return [];
-
             return v.parse(v.array(carListSchema), data.data);
         },
         retry: false
     })
 
     return {
-        cars: data,
+        cars: data ? data : [],
         ...rest
     }
 }
