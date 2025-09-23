@@ -8,7 +8,7 @@ import { Calendar } from "@/components/ui/calendar"
 import React, { useState } from "react";
 import { ChevronDown } from "lucide-react";
 import { useSelectedCar } from "@/contexts/SelectedCarContext";
-import { ax, getCookie } from "@/lib/utils";
+import { ax, ExpiredTokenErrorCode, getCookie } from "@/lib/utils";
 
 
 export default function InstallmentAdd() {
@@ -43,7 +43,7 @@ export default function InstallmentAdd() {
             navigate("/management/installment", { replace: true });
         } catch (error: any) {
             console.error(error);
-            if (error.response.data.code === "EA0006") {
+            if (ExpiredTokenErrorCode.includes(error.response.data.code)) {
                 alert("로그인 정보가 만료되었습니다. 다시 로그인해주세요.");
                 navigate("/login");
             }

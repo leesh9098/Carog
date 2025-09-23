@@ -4,7 +4,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { useNavigate } from "react-router-dom";
-import { ax, getCookie } from "@/lib/utils";
+import { ax, ExpiredTokenErrorCode, getCookie } from "@/lib/utils";
 import { Calendar } from "@/components/ui/calendar"
 import React, { useState } from "react";
 import { ChevronDown } from "lucide-react";
@@ -44,7 +44,7 @@ export default function MaintenanceHistoryAdd() {
             navigate("/management/maintenance-history", { replace: true });
         } catch (error: any) {
             console.error(error);
-            if (error.response.data.code === "EA0006") {
+            if (ExpiredTokenErrorCode.includes(error.response.data.code)) {
                 alert("로그인 정보가 만료되었습니다. 다시 로그인해주세요.");
                 navigate("/login");
             }

@@ -1,4 +1,4 @@
-import { ax, getCookie } from "@/lib/utils";
+import { ax, ExpiredTokenErrorCode, getCookie } from "@/lib/utils";
 import { createContext, useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -57,7 +57,7 @@ export const SessionProvider = ({ children }: { children: React.ReactNode }) => 
                 setUser(data.data);
             } catch (error: any) {
                 console.error(error);
-                if (error.response.data.code === "EA0006") {
+                if (ExpiredTokenErrorCode.includes(error.response.data.code)) {
                     document.cookie = `token=; path=/; max-age=0;`;
                     setIsLoggedIn(false);
                     setUser(null);

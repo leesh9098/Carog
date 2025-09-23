@@ -61,3 +61,5 @@ export function getAccidentType(type: string) {
       return ""
   }
 }
+
+export const ExpiredTokenErrorCode = ["EU0001", "EU0002", "EA0006", "EA0011"] as const;

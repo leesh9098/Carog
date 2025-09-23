@@ -3,7 +3,7 @@ import FlexDiv from "@/components/FlexDiv";
 import { Button } from "@/components/ui/button";
 import { useSession } from "@/contexts/SessionContext";
 import { useCarList } from "@/hooks/tanstackQuery/useCarList";
-import { ax, getCookie } from "@/lib/utils";
+import { ax, ExpiredTokenErrorCode, getCookie } from "@/lib/utils";
 import { Link, useNavigate } from "react-router-dom";
 
 export default function My() {
@@ -32,7 +32,7 @@ export default function My() {
             navigate('/');
         } catch (error: any) {
             console.error(error);
-            if (error.response.data.code === "EA0006") {
+            if (ExpiredTokenErrorCode.includes(error.response.data.code)) {
                 navigate("/");
             }
         }

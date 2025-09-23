@@ -9,7 +9,7 @@ import React, { useState, useEffect } from "react";
 import { ChevronDown } from "lucide-react";
 import { useEtcList } from "@/hooks/tanstackQuery/useEtcList";
 import { useSelectedCar } from "@/contexts/SelectedCarContext";
-import { ax, getCookie } from "@/lib/utils";
+import { ax, ExpiredTokenErrorCode, getCookie } from "@/lib/utils";
 
 export default function EtcId() {
     const navigate = useNavigate();
@@ -54,7 +54,7 @@ export default function EtcId() {
             navigate("/management/etc", { replace: true });
         } catch (error: any) {
             console.error(error);
-            if (error.response.data.code === "EA0006") {
+            if (ExpiredTokenErrorCode.includes(error.response.data.code)) {
                 alert("로그인 정보가 만료되었습니다. 다시 로그인해주세요.");
                 navigate("/login");
             }

@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import LicensePlate from "@/components/LicensePlate";
 import FlexDiv from "@/components/FlexDiv";
 import { Button } from "@/components/ui/button";
-import { ax, getCookie } from "@/lib/utils";
+import { ax, ExpiredTokenErrorCode, getCookie } from "@/lib/utils";
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
@@ -45,7 +45,7 @@ export default function CarCard({
             queryClient.invalidateQueries({ queryKey: ['carList'] });
         } catch (error: any) {
             console.error(error);
-            if (error.response.data.code === "EA0006") {
+            if (ExpiredTokenErrorCode.includes(error.response.data.code)) {
                 alert("로그인 정보가 만료되었습니다. 다시 로그인해주세요.");
                 navigate("/login");
             }
@@ -69,7 +69,7 @@ export default function CarCard({
             setDeleteIsOpen(false);
         } catch (error: any) {
             console.error(error);
-            if (error.response.data.code === "EA0006") {
+            if (ExpiredTokenErrorCode.includes(error.response.data.code)) {
                 alert("로그인 정보가 만료되었습니다. 다시 로그인해주세요.");
                 navigate("/login");
             }

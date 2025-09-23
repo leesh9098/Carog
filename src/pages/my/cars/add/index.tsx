@@ -2,7 +2,7 @@ import FlexDiv from "@/components/FlexDiv";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { ax, getCookie } from "@/lib/utils";
+import { ax, ExpiredTokenErrorCode, getCookie } from "@/lib/utils";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -26,7 +26,7 @@ export default function CarAdd() {
             navigate("/my/cars", { replace: true });
         } catch (error: any) {
             console.error(error);
-            if (error.response.data.code === "EA0006") {
+            if (ExpiredTokenErrorCode.includes(error.response.data.code)) {
                 alert("로그인 정보가 만료되었습니다. 다시 로그인해주세요.");
                 navigate("/login");
             }
