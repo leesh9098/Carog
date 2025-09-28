@@ -45,6 +45,7 @@ export default function InstallmentAdd() {
             console.error(error);
             if (ExpiredTokenErrorCode.includes(error.response.data.code)) {
                 alert("로그인 정보가 만료되었습니다. 다시 로그인해주세요.");
+                document.cookie = `token=; path=/; max-age=0;`;
                 navigate("/login");
             }
         }
