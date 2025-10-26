@@ -4,15 +4,17 @@ import ItemCard from "@/components/ItemCard";
 import { Textarea } from "@/components/ui/textarea";
 import { useInstallmentList } from "@/hooks/tanstackQuery/useInstallmentList";
 import { useSelectedCar } from "@/contexts/SelectedCarContext";
+import { useExistCar } from "@/hooks/useExistCar";
 
 export default function Installment() {
     const { selectedCar } = useSelectedCar();
     const { installmentList } = useInstallmentList(selectedCar?.id);
+    const { handleCheckExistCar } = useExistCar("/management/installment/add");
 
     return (
         <>
             <FlexDiv className="justify-center">
-                <AddButton to="/management/installment/add" />
+                <AddButton to="/management/installment/add" onClick={handleCheckExistCar} />
             </FlexDiv>
             {installmentList?.map(installment => (
                 <ItemCard

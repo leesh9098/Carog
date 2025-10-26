@@ -2,9 +2,18 @@ import { Button } from "@/components/ui/button";
 import { Plus } from "lucide-react";
 import { Link } from "react-router-dom";
 
-export default function AddButton({ to }: { to: string }) {
+interface AddButtonProps {
+    to: string;
+    onClick?: (e: React.MouseEvent<HTMLAnchorElement>) => void;
+}
+
+export default function AddButton({
+    to,
+    onClick
+}: AddButtonProps) {
+
     return (
-        <Link to={to}>
+        <Link to={to} onClick={onClick}>
             <Button
                 variant="ghost"
                 className="w-full gap-2"

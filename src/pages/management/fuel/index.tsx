@@ -4,15 +4,17 @@ import ItemCard from "@/components/ItemCard";
 import { Textarea } from "@/components/ui/textarea";
 import { useFuelList } from "@/hooks/tanstackQuery/useFuelList";
 import { useSelectedCar } from "@/contexts/SelectedCarContext";
+import { useExistCar } from "@/hooks/useExistCar";
 
 export default function Fuel() {
     const { selectedCar } = useSelectedCar();
     const { fuelList } = useFuelList(selectedCar?.id);
-
+    const { handleCheckExistCar } = useExistCar("/management/fuel/add");
+    
     return (
         <>
             <FlexDiv className="justify-center">
-                <AddButton to="/management/fuel/add" />
+                <AddButton to="/management/fuel/add" onClick={handleCheckExistCar} />
             </FlexDiv>
             {fuelList?.map(fuel => (
                 <ItemCard

@@ -4,15 +4,17 @@ import ItemCard from "@/components/ItemCard";
 import { Textarea } from "@/components/ui/textarea";
 import { useAccidentList } from "@/hooks/tanstackQuery/useAccidentList";
 import { useSelectedCar } from "@/contexts/SelectedCarContext";
+import { useExistCar } from "@/hooks/useExistCar";
 
 export default function Accident() {
     const { selectedCar } = useSelectedCar();
     const { accidentList } = useAccidentList(selectedCar?.id);
+    const { handleCheckExistCar } = useExistCar("/management/accident/add");
 
     return (
         <>
             <FlexDiv className="justify-center">
-                <AddButton to="/management/accident/add" />
+                <AddButton to="/management/accident/add" onClick={handleCheckExistCar} />
             </FlexDiv>
             {accidentList?.map(accident => (
                 <ItemCard

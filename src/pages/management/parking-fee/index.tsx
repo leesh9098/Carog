@@ -4,15 +4,17 @@ import ItemCard from "@/components/ItemCard";
 import { Textarea } from "@/components/ui/textarea";
 import { useParkingFeeList } from "@/hooks/tanstackQuery/useParkingFeeList";
 import { useSelectedCar } from "@/contexts/SelectedCarContext";
+import { useExistCar } from "@/hooks/useExistCar";
 
 export default function ParkingFee() {
     const { selectedCar } = useSelectedCar();
     const { parkingFeeList } = useParkingFeeList(selectedCar?.id);
+    const { handleCheckExistCar } = useExistCar("/management/parking-fee/add");
 
     return (
         <>
             <FlexDiv className="justify-center">
-                <AddButton to="/management/parking-fee/add" />
+                <AddButton to="/management/parking-fee/add" onClick={handleCheckExistCar} />
             </FlexDiv>
             {parkingFeeList?.map(parkingFee => (
                 <ItemCard

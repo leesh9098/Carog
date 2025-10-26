@@ -4,15 +4,17 @@ import ItemCard from "@/components/ItemCard";
 import { Textarea } from "@/components/ui/textarea";
 import { useEtcList } from "@/hooks/tanstackQuery/useEtcList";
 import { useSelectedCar } from "@/contexts/SelectedCarContext";
+import { useExistCar } from "@/hooks/useExistCar";
 
 export default function Etc() {
     const { selectedCar } = useSelectedCar();
     const { etcList } = useEtcList(selectedCar?.id);
+    const { handleCheckExistCar } = useExistCar("/management/etc/add");
     
     return (
         <>
             <FlexDiv className="justify-center">
-                <AddButton to="/management/etc/add" />
+                <AddButton to="/management/etc/add" onClick={handleCheckExistCar} />
             </FlexDiv>
             {etcList?.map(etc => (
                 <ItemCard

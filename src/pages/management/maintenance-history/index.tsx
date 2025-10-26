@@ -4,15 +4,17 @@ import AddButton from "@/molecules/AddButton";
 import { Textarea } from "@/components/ui/textarea";
 import { useMaintenanceHistoryList } from "@/hooks/tanstackQuery/useMaintenanceHistoryList";
 import { useSelectedCar } from "@/contexts/SelectedCarContext";
+import { useExistCar } from "@/hooks/useExistCar";
 
 export default function MaintenanceHistory() {
     const { selectedCar } = useSelectedCar();
     const { maintenanceHistoryList } = useMaintenanceHistoryList(selectedCar?.id);
-
+    const { handleCheckExistCar } = useExistCar("/management/maintenance-history/add");
+    
     return (
         <>
             <FlexDiv className="justify-center">
-                <AddButton to="/management/maintenance-history/add" />
+                <AddButton to="/management/maintenance-history/add" onClick={handleCheckExistCar} />
             </FlexDiv>
             {maintenanceHistoryList?.map(maintenanceHistory => (
                 <ItemCard

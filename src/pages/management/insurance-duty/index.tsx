@@ -4,15 +4,17 @@ import ItemCard from "@/components/ItemCard";
 import { Textarea } from "@/components/ui/textarea";
 import { useInsuranceDutyList } from "@/hooks/tanstackQuery/useInsuranceDutyList";
 import { useSelectedCar } from "@/contexts/SelectedCarContext";
+import { useExistCar } from "@/hooks/useExistCar";
 
 export default function InsuranceDuty() {
     const { selectedCar } = useSelectedCar();
     const { insuranceDutyList } = useInsuranceDutyList(selectedCar?.id);
+    const { handleCheckExistCar } = useExistCar("/management/insurance-duty/add");
 
     return (
         <>
             <FlexDiv className="justify-center">
-                <AddButton to="/management/insurance-duty/add" />
+                <AddButton to="/management/insurance-duty/add" onClick={handleCheckExistCar} />
             </FlexDiv>
             {insuranceDutyList?.map(insuranceDuty => (
                 <ItemCard
