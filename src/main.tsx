@@ -1,46 +1,46 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import Home from '@/pages'
-import Login from '@/pages/login'
-import My from '@/pages/my'
-import Cars from '@/pages/my/cars'
-import Car from '@/pages/my/cars/id'
-import MaintenanceHistory from '@/pages/management/maintenance-history'
-import Fuel from '@/pages/management/fuel'
-import InsuranceDuty from '@/pages/management/insurance-duty'
-import Accident from '@/pages/management/accident'
-import Installment from '@/pages/management/installment'
-import Etc from '@/pages/management/etc'
-import ParkingFee from '@/pages/management/parking-fee'
-import Header from '@/organisms/Header'
-import MaintenanceHistoryId from '@/pages/management/maintenance-history/id'
-import AccidentId from '@/pages/management/accident/id'
-import EtcId from '@/pages/management/etc/id'
-import FuelId from '@/pages/management/fuel/id'
-import InstallmentId from '@/pages/management/installment/id'
-import InsuranceDutyId from '@/pages/management/insurance-duty/id'
-import ParkingFeeId from '@/pages/management/parking-fee/id'
-import { SidebarProvider } from '@/components/ui/sidebar'
-import Sidebar from '@/components/Sidebar'
-import KakaoLogin from './pages/auth/login/kakao'
-import AccidentAdd from './pages/management/accident/add'
-import EtcAdd from './pages/management/etc/add'
-import FuelAdd from './pages/management/fuel/add'
-import InstallmentAdd from './pages/management/installment/add'
-import InsuranceDutyAdd from './pages/management/insurance-duty/add'
-import MaintenanceHistoryAdd from './pages/management/maintenance-history/add'
-import ParkingFeeAdd from './pages/management/parking-fee/add'
-import { SessionProvider } from './contexts/SessionContext'
-import ManagementLayout from './pages/management/layout'
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import { SelectedCarProvider } from './contexts/SelectedCarContext'
-import CarAdd from './pages/my/cars/add'
-import { Analytics } from '@vercel/analytics/react'
+import { StrictMode } from "react"
+import { createRoot } from "react-dom/client"
+import { BrowserRouter, Route, Routes } from "react-router-dom"
+import Home from "@/pages"
+import Login from "@/pages/login"
+import My from "@/pages/my"
+import Cars from "@/pages/my/cars"
+import Car from "@/pages/my/cars/id"
+import MaintenanceHistory from "@/pages/management/maintenance-history"
+import Fuel from "@/pages/management/fuel"
+import InsuranceDuty from "@/pages/management/insurance-duty"
+import Accident from "@/pages/management/accident"
+import Installment from "@/pages/management/installment"
+import Etc from "@/pages/management/etc"
+import ParkingFee from "@/pages/management/parking-fee"
+import Header from "@/organisms/Header"
+import MaintenanceHistoryId from "@/pages/management/maintenance-history/id"
+import AccidentId from "@/pages/management/accident/id"
+import EtcId from "@/pages/management/etc/id"
+import FuelId from "@/pages/management/fuel/id"
+import InstallmentId from "@/pages/management/installment/id"
+import InsuranceDutyId from "@/pages/management/insurance-duty/id"
+import ParkingFeeId from "@/pages/management/parking-fee/id"
+import Sidebar from "@/components/Sidebar"
+import KakaoLogin from "./pages/auth/login/kakao"
+import AccidentAdd from "./pages/management/accident/add"
+import EtcAdd from "./pages/management/etc/add"
+import FuelAdd from "./pages/management/fuel/add"
+import InstallmentAdd from "./pages/management/installment/add"
+import InsuranceDutyAdd from "./pages/management/insurance-duty/add"
+import MaintenanceHistoryAdd from "./pages/management/maintenance-history/add"
+import ParkingFeeAdd from "./pages/management/parking-fee/add"
+import { SessionProvider } from "./contexts/SessionContext"
+import ManagementLayout from "./pages/management/layout"
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
+import { SelectedCarProvider } from "./contexts/SelectedCarContext"
+import CarAdd from "./pages/my/cars/add"
+import { Analytics } from "@vercel/analytics/react"
+import { SidebarProvider } from "./contexts/SidebarContext"
 
 const queryClient = new QueryClient();
 
-createRoot(document.getElementById('root')!).render(
+createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <BrowserRouter>
       <QueryClientProvider client={queryClient}>
@@ -49,7 +49,7 @@ createRoot(document.getElementById('root')!).render(
             <SelectedCarProvider>
               <Header />
               <Sidebar />
-              <div className='w-full mt-14'>
+              <div className="w-full pt-14">
                 <Analytics />
                 <Routes>
                   <Route path="/" element={<Home />} />

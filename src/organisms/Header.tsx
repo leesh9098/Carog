@@ -1,6 +1,6 @@
 import FlexDiv from "@/components/FlexDiv";
 import { Button } from "@/components/ui/button";
-import { useSidebar } from "@/components/ui/sidebar";
+import { useSidebar } from "@/contexts/SidebarContext";
 import { Menu } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
@@ -9,7 +9,7 @@ export default function Header() {
     const location = useLocation();
     const pathname = location.pathname;
 
-    const { toggleSidebar } = useSidebar();
+    const { setIsOpen } = useSidebar();
 
     function getTitle() {
         if (pathname === '/') {
@@ -45,7 +45,6 @@ export default function Header() {
         <header className="fixed top-0 left-1/2 transform -translate-x-1/2 w-full max-w-120 h-14 flex items-center shadow-md px-4 bg-white">
             <FlexDiv className="relative w-full justify-between">
                 <Link to="/">
-                    {/* <span className="text-lg font-bold">Carog</span> */}
                     <img
                         src="/icons/logo.png"
                         alt="logo"
@@ -58,7 +57,7 @@ export default function Header() {
                 <Button
                     variant="ghost"
                     className="size-fit !p-0 hover:bg-transparent"
-                    onClick={toggleSidebar}
+                    onClick={() => setIsOpen(true)}
                 >
                     <Menu className="size-6" />
                 </Button>

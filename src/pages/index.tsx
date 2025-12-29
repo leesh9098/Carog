@@ -112,7 +112,7 @@ export default function Home() {
     // console.log("error message", error?.response.data)
 
     return (
-        <div>
+        <div className="w-full">
             {isLoggedIn && !isLoading && cars?.length === 0 && (
                 <div className="p-4">
                     <FlexDiv className="flex-col gap-y-4 p-4 border border-gray-300 rounded-md shadow-md">
