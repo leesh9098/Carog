@@ -88,7 +88,7 @@ export default function Sidebar() {
 
     return (
         <div className={cn(
-            "absolute top-0 right-0 sm:right-[calc((100vw-480px)/2)] w-full max-w-120 h-dvh bg-neutral-900/60 transition-all duration-300",
+            "absolute top-0 right-0 sm:right-[calc((100vw-480px)/2)] w-full max-w-120 h-dvh bg-neutral-900/60 transition-all duration-300 z-10",
             isOpen ? 'opacity-100 visible pointer-events-auto' : "opacity-0 invisible pointer-events-none"
         )}>
             <div className="relative w-full h-full">
@@ -112,112 +112,104 @@ export default function Sidebar() {
                                     {!isHome && (
                                         <>
                                             <FlexDiv className="w-full min-w-0 flex-col gap-1">
-                                                <li className="group/menu-item relative">
-                                                    <Link
-                                                        to="/"
-                                                        onClick={(e) => handleLinkClick(e, '/')}
-                                                    >
-                                                        <SidebarMenuButton className="font-semibold text-lg">
-                                                            홈
-                                                        </SidebarMenuButton>
-                                                    </Link>
-                                                </li>
+                                                <Link
+                                                    to="/"
+                                                    onClick={(e) => handleLinkClick(e, '/')}
+                                                >
+                                                    <SidebarMenuButton className="font-semibold text-lg">
+                                                        홈
+                                                    </SidebarMenuButton>
+                                                </Link>
                                             </FlexDiv>
                                             <FlexDiv className="w-full min-w-0 flex-col gap-1">
                                                 <Collapsible defaultOpen>
-                                                    <li className="group/menu-item relative">
-                                                        <CollapsibleTrigger asChild>
-                                                            <SidebarMenuButton className="flex justify-between items-center w-full font-semibold text-lg">
-                                                                차량관리
-                                                                <ChevronDown className="size-4" />
-                                                            </SidebarMenuButton>
-                                                        </CollapsibleTrigger>
-                                                        <CollapsibleContent>
-                                                            <ul className="border-sidebar-border mx-3.5 flex min-w-0 translate-x-px flex-col gap-1 border-l px-2.5 py-0.5 group-data-[collapsible=icon]:hidden">
-                                                                <li className="group/menu-sub-item relative font-semibold text-base">
-                                                                    <Link
-                                                                        to="/management/maintenance-history"
-                                                                        onClick={(e) => handleLinkClick(e, '/management/maintenance-history')}
-                                                                    >
-                                                                        정비내역
-                                                                    </Link>
-                                                                </li>
-                                                                <li className="group/menu-sub-item relative font-semibold text-base">
-                                                                    <Link
-                                                                        to="/management/fuel"
-                                                                        onClick={(e) => handleLinkClick(e, '/management/fuel')}
-                                                                    >
-                                                                        유류비
-                                                                    </Link>
-                                                                </li>
-                                                                <li className="group/menu-sub-item relative font-semibold text-base">
-                                                                    <Link
-                                                                        to="/management/insurance-duty"
-                                                                        onClick={(e) => handleLinkClick(e, '/management/insurance-duty')}
-                                                                    >
-                                                                        보험료/세금
-                                                                    </Link>
-                                                                </li>
-                                                                <li className="group/menu-sub-item relative font-semibold text-base">
-                                                                    <Link
-                                                                        to="/management/accident"
-                                                                        onClick={(e) => handleLinkClick(e, '/management/accident')}
-                                                                    >
-                                                                        사고
-                                                                    </Link>
-                                                                </li>
-                                                                <li className="group/menu-sub-item relative font-semibold text-base">
-                                                                    <Link
-                                                                        to="/management/installment"
-                                                                        onClick={(e) => handleLinkClick(e, '/management/installment')}
-                                                                    >
-                                                                        할부
-                                                                    </Link>
-                                                                </li>
-                                                                <li className="group/menu-sub-item relative font-semibold text-base">
-                                                                    <Link
-                                                                        to="/management/parking-fee"
-                                                                        onClick={(e) => handleLinkClick(e, '/management/parking-fee')}
-                                                                    >
-                                                                        주차비
-                                                                    </Link>
-                                                                </li>
-                                                                <li className="group/menu-sub-item relative font-semibold text-base">
-                                                                    <Link
-                                                                        to="/management/etc"
-                                                                        onClick={(e) => handleLinkClick(e, '/management/etc')}
-                                                                    >
-                                                                        기타
-                                                                    </Link>
-                                                                </li>
-                                                            </ul>
-                                                        </CollapsibleContent>
-                                                    </li>
+                                                    <CollapsibleTrigger asChild>
+                                                        <SidebarMenuButton className="flex justify-between items-center w-full font-semibold text-lg">
+                                                            차량관리
+                                                            <ChevronDown className="size-4" />
+                                                        </SidebarMenuButton>
+                                                    </CollapsibleTrigger>
+                                                    <CollapsibleContent>
+                                                        <ul className="border-sidebar-border mx-3.5 flex min-w-0 translate-x-px flex-col gap-1 border-l px-2.5 py-0.5 group-data-[collapsible=icon]:hidden">
+                                                            <li className="group/menu-sub-item relative font-semibold text-base">
+                                                                <Link
+                                                                    to="/management/maintenance-history"
+                                                                    onClick={(e) => handleLinkClick(e, '/management/maintenance-history')}
+                                                                >
+                                                                    정비내역
+                                                                </Link>
+                                                            </li>
+                                                            <li className="group/menu-sub-item relative font-semibold text-base">
+                                                                <Link
+                                                                    to="/management/fuel"
+                                                                    onClick={(e) => handleLinkClick(e, '/management/fuel')}
+                                                                >
+                                                                    유류비
+                                                                </Link>
+                                                            </li>
+                                                            <li className="group/menu-sub-item relative font-semibold text-base">
+                                                                <Link
+                                                                    to="/management/insurance-duty"
+                                                                    onClick={(e) => handleLinkClick(e, '/management/insurance-duty')}
+                                                                >
+                                                                    보험료/세금
+                                                                </Link>
+                                                            </li>
+                                                            <li className="group/menu-sub-item relative font-semibold text-base">
+                                                                <Link
+                                                                    to="/management/accident"
+                                                                    onClick={(e) => handleLinkClick(e, '/management/accident')}
+                                                                >
+                                                                    사고
+                                                                </Link>
+                                                            </li>
+                                                            <li className="group/menu-sub-item relative font-semibold text-base">
+                                                                <Link
+                                                                    to="/management/installment"
+                                                                    onClick={(e) => handleLinkClick(e, '/management/installment')}
+                                                                >
+                                                                    할부
+                                                                </Link>
+                                                            </li>
+                                                            <li className="group/menu-sub-item relative font-semibold text-base">
+                                                                <Link
+                                                                    to="/management/parking-fee"
+                                                                    onClick={(e) => handleLinkClick(e, '/management/parking-fee')}
+                                                                >
+                                                                    주차비
+                                                                </Link>
+                                                            </li>
+                                                            <li className="group/menu-sub-item relative font-semibold text-base">
+                                                                <Link
+                                                                    to="/management/etc"
+                                                                    onClick={(e) => handleLinkClick(e, '/management/etc')}
+                                                                >
+                                                                    기타
+                                                                </Link>
+                                                            </li>
+                                                        </ul>
+                                                    </CollapsibleContent>
                                                 </Collapsible>
                                             </FlexDiv>
                                         </>
                                     )}
                                     <FlexDiv className="w-full min-w-0 flex-col gap-1">
-                                        <li className="group/menu-item relative">
-                                            <Link
-                                                to="/my"
-                                                onClick={(e) => handleLinkClick(e, '/my')}
-                                            >
-                                                <SidebarMenuButton className="font-semibold text-lg">
-                                                    마이페이지
-                                                </SidebarMenuButton>
-                                            </Link>
-                                        </li>
+                                        <Link
+                                            to="/my"
+                                            onClick={(e) => handleLinkClick(e, '/my')}
+                                        >
+                                            <SidebarMenuButton className="font-semibold text-lg">
+                                                마이페이지
+                                            </SidebarMenuButton>
+                                        </Link>
                                     </FlexDiv>
                                     <FlexDiv className="w-full min-w-0 flex-col gap-1">
-                                        <li className="group/menu-item relative">
-                                            <SidebarMenuButton
-                                                className="font-semibold text-lg"
-                                                onClick={handleLogout}
-                                            >
-                                                로그아웃
-                                            </SidebarMenuButton>
-                                        </li>
+                                        <SidebarMenuButton
+                                            className="font-semibold text-lg"
+                                            onClick={handleLogout}
+                                        >
+                                            로그아웃
+                                        </SidebarMenuButton>
                                     </FlexDiv>
                                 </FlexDiv>
                             </FlexDiv>
@@ -226,16 +218,14 @@ export default function Sidebar() {
                         <FlexDiv className="min-h-0 flex-1 flex-col gap-2 overflow-auto">
                             <FlexDiv className="relative flex w-full min-w-0 flex-col p-2">
                                 <FlexDiv className="w-full min-w-0 flex-col gap-1">
-                                    <li className="group/menu-item relative">
-                                        <Link
-                                            to="/login"
-                                            onClick={(e) => handleLinkClick(e, '/login')}
-                                        >
-                                            <SidebarMenuButton className="font-semibold text-lg">
-                                                로그인
-                                            </SidebarMenuButton>
-                                        </Link>
-                                    </li>
+                                    <Link
+                                        to="/login"
+                                        onClick={(e) => handleLinkClick(e, '/login')}
+                                    >
+                                        <SidebarMenuButton className="font-semibold text-lg">
+                                            로그인
+                                        </SidebarMenuButton>
+                                    </Link>
                                 </FlexDiv>
                             </FlexDiv>
                         </FlexDiv>
