@@ -43,17 +43,18 @@ export default function Header() {
 
     return (
         <header className="fixed top-0 left-1/2 transform -translate-x-1/2 w-full max-w-120 h-14 flex items-center shadow-md px-4 bg-white">
-            <FlexDiv className="relative w-full justify-between">
+            <FlexDiv className="relative w-full justify-between items-center">
                 <Link to="/">
-                    <img
-                        src="/icons/logo.png"
-                        alt="logo"
-                        className="w-auto h-8"
-                    />
+                    <h1 className="text-3xl font-bold">
+                        <span className="text-primary">Car</span>
+                        <span className="text-gray-500">og</span>
+                    </h1>
                 </Link>
-                <span className="text-xl font-bold absolute left-1/2 transform -translate-x-1/2">
-                    {getTitle()}
-                </span>
+                {pathname !== '/' && (
+                    <span className="text-xl font-bold absolute left-1/2 transform -translate-x-1/2">
+                        {getTitle()}
+                    </span>
+                )}
                 <Button
                     variant="ghost"
                     className="size-fit !p-0 hover:bg-transparent"
