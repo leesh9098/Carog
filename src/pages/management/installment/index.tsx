@@ -19,6 +19,10 @@ export default function Installment() {
             {installmentList?.map(installment => (
                 <ItemCard
                     key={installment.id}
+                    path="installment"
+                    id={installment.id}
+                    carInfoId={installment.carInfoId}
+                    queryKey={['installmentList', installment.carInfoId]}
                     date={installment.date}
                     to={`/management/installment/${installment.id}`}
                 >

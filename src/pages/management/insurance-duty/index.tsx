@@ -19,6 +19,10 @@ export default function InsuranceDuty() {
             {insuranceDutyList?.map(insuranceDuty => (
                 <ItemCard
                     key={insuranceDuty.id}
+                    path="insurance-duty"
+                    id={insuranceDuty.id}
+                    carInfoId={insuranceDuty.carInfoId}
+                    queryKey={['insuranceDutyList', insuranceDuty.carInfoId]}
                     date={insuranceDuty.date}
                     to={`/management/insurance-duty/${insuranceDuty.id}`}
                 >

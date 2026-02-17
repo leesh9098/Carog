@@ -19,6 +19,10 @@ export default function ParkingFee() {
             {parkingFeeList?.map(parkingFee => (
                 <ItemCard
                     key={parkingFee.id}
+                    path="parking"
+                    id={parkingFee.id}
+                    carInfoId={parkingFee.carInfoId}
+                    queryKey={['parkingFeeList', parkingFee.carInfoId]}
                     date={parkingFee.date}
                     to={`/management/parking-fee/${parkingFee.id}`}
                 >

@@ -19,6 +19,10 @@ export default function Accident() {
             {accidentList?.map(accident => (
                 <ItemCard
                     key={accident.id}
+                    path="accident"
+                    id={accident.id}
+                    carInfoId={accident.carInfoId}
+                    queryKey={['accidentList', accident.carInfoId]}
                     date={accident.date}
                     to={`/management/accident/${accident.id}`}
                 >

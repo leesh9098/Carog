@@ -19,6 +19,10 @@ export default function Fuel() {
             {fuelList?.map(fuel => (
                 <ItemCard
                     key={fuel.id}
+                    path="fuel"
+                    id={fuel.id}
+                    carInfoId={fuel.carInfoId}
+                    queryKey={['fuelList', fuel.carInfoId]}
                     date={fuel.date}
                     to={`/management/fuel/${fuel.id}`}
                 >

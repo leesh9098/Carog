@@ -19,6 +19,10 @@ export default function MaintenanceHistory() {
             {maintenanceHistoryList?.map(maintenanceHistory => (
                 <ItemCard
                     key={maintenanceHistory.id}
+                    path="maintenance"
+                    id={maintenanceHistory.id}
+                    carInfoId={maintenanceHistory.carInfoId}
+                    queryKey={['maintenanceHistoryList', maintenanceHistory.carInfoId]}
                     date={maintenanceHistory.date}
                     to={`/management/maintenance-history/${maintenanceHistory.id}`}
                 >

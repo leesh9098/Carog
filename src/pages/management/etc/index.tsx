@@ -19,6 +19,10 @@ export default function Etc() {
             {etcList?.map(etc => (
                 <ItemCard
                     key={etc.id}
+                    path="etc"
+                    id={etc.id}
+                    carInfoId={etc.carInfoId}
+                    queryKey={['etcList', etc.carInfoId]}
                     date={etc.date}
                     to={`/management/etc/${etc.id}`}
                 >
